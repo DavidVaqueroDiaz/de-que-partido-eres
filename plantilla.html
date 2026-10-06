@@ -4,10 +4,12 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Atkinson+Hyperlegible:wght@400;700&family=IBM+Plex+Mono:wght@500&display=swap">
 <style>
 /* Layout: cartel electoral en una columna; el hemiciclo de 350 escaños es la portada y la barra de progreso.
-   Ningún color de partido: el arcoíris completo del hemiciclo representa a todos por igual. */
+   Fondo blanco siempre (decisión de diseño: un solo tema claro, también con el móvil en modo oscuro). */
 :root {
-  --paper: #f3f2ee;
+  color-scheme: light;
+  --paper: #ffffff;
   --card: #ffffff;
+  --soft: #f4f3ef;
   --ink: #15171c;
   --muted: #5d626a;
   --rule: #dcdad3;
@@ -19,19 +21,6 @@
   --f-body: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
   --f-data: "IBM Plex Mono", ui-monospace, "Consolas", monospace;
 }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --paper: #101216; --card: #191c21; --ink: #eeece7; --muted: #9ca1a9; --rule: #2b2f36;
-    --chip: #23272e; --seat-off: #2a2e36; --focus: #f2b13c;
-    color-scheme: dark;
-  }
-}
-:root[data-theme="dark"] {
-  --paper: #101216; --card: #191c21; --ink: #eeece7; --muted: #9ca1a9; --rule: #2b2f36;
-  --chip: #23272e; --seat-off: #2a2e36; --focus: #f2b13c;
-  color-scheme: dark;
-}
-
 * { box-sizing: border-box; }
 body {
   background: var(--paper); color: var(--ink);
@@ -120,7 +109,7 @@ details.note .body { display: grid; gap: 10px; padding-top: 10px; font-size: 15p
 
 .answers { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-top: 4px; }
 .ans {
-  border: 2px solid var(--rule); background: var(--paper); border-radius: 14px;
+  border: 2px solid var(--rule); background: var(--soft); border-radius: 14px;
   padding: 14px 4px 12px; min-height: 84px;
   display: grid; justify-items: center; align-content: center; gap: 6px;
   font-family: var(--f-display); font-stretch: 75%; font-weight: 800; font-size: 22px; text-transform: uppercase; line-height: 1;
@@ -184,7 +173,7 @@ details.note .body { display: grid; gap: 10px; padding-top: 10px; font-size: 15p
 .stmt .you { font-size: 14px; color: var(--muted); }
 .stmt .you b { color: var(--ink); }
 .strip { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
-.col { background: var(--paper); border-radius: 12px; padding: 8px 6px 10px; display: grid; align-content: start; gap: 8px; border: 2px solid transparent; }
+.col { background: var(--soft); border-radius: 12px; padding: 8px 6px 10px; display: grid; align-content: start; gap: 8px; border: 2px solid transparent; }
 .col.mine { border-color: var(--ink); }
 .col .lab { font-family: var(--f-display); font-stretch: 75%; font-weight: 800; text-transform: uppercase; font-size: 15px; text-align: center; }
 .col .lab small { display: block; font-family: var(--f-body); font-stretch: 100%; font-weight: 400; text-transform: none; font-size: 11px; color: var(--muted); }

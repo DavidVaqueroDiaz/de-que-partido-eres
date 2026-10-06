@@ -11,7 +11,29 @@ import sys
 AQUI = os.path.dirname(os.path.abspath(__file__))
 
 # Enlace público del test (el del Artifact en claude.ai). Vacío = se ocultan los botones de compartir.
-SHARE_URL = "https://claude.ai/artifact/HLiqBkfStM8brRdw4PWttb"
+SHARE_URL = "https://davidvaquerodiaz.github.io/de-que-partido-eres/"
+
+# Cabecera de la web pública (GitHub Pages). La vista previa de WhatsApp sale de las etiquetas og:.
+HEAD = """<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="{desc}">
+<meta property="og:type" content="website">
+<meta property="og:title" content="¿De qué partido político eres?">
+<meta property="og:description" content="{desc}">
+<meta property="og:url" content="{url}">
+<meta property="og:image" content="{url}portada.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#ffffff">
+<style>[hidden]{{display:none!important}} html,body{{margin:0}} img{{max-width:100%}}</style>
+</head>
+<body>
+"""
+DESC = "35 preguntas rápidas de sí o no sobre lo que proponen los partidos. Al final, tu porcentaje de coincidencia con cada uno para las generales del 29-N."
 
 PARTIES = [
     # Orden alfabético para no dar preferencia a nadie en la portada.
@@ -172,6 +194,10 @@ def main():
     html = html.replace(marca, json.dumps(data, ensure_ascii=False).replace("</", "<\\/"))
     with open(os.path.join(AQUI, "index.html"), "w", encoding="utf-8") as fh:
         fh.write(html)
+    # Web pública: la misma página con su cabecera completa, en docs/ (lo que sirve GitHub Pages).
+    os.makedirs(os.path.join(AQUI, "docs"), exist_ok=True)
+    with open(os.path.join(AQUI, "docs", "index.html"), "w", encoding="utf-8") as fh:
+        fh.write(HEAD.format(desc=DESC, url=SHARE_URL) + html + "\n</body>\n</html>\n")
 
     nulos = sum(1 for sid in limpio for pid in limpio[sid] if limpio[sid][pid]["pos"] is None)
     print(f"OK: index.html con {len(STATEMENTS)} preguntas x {len(PARTIES)} partidos; {nulos} celdas sin postura.")
