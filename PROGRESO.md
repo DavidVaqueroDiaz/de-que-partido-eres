@@ -19,6 +19,12 @@ Para regenerar: `python construir.py` y volver a publicar `index.html` con la mi
   - Comprobado: quien responde como un partido lo saca primero (>90 %), salvo el BNG, que empata casi con EH Bildu y Podemos (97-98 %).
   - Cambios de datos a mano: e2/SALF a null (su fuente daba 404).
 
+- 07/10/2026: **web pública en GitHub Pages**: https://davidvaquerodiaz.github.io/de-que-partido-eres/ (repo público DavidVaqueroDiaz/de-que-partido-eres, sirve la carpeta `docs/`). El enlace de claude.ai obligaba a iniciar sesión.
+  - `construir.py` escribe también `docs/index.html` (página completa con etiquetas og: para la vista previa de WhatsApp) y `docs/portada.png` es la imagen de vista previa (1200x630, hecha con Chrome sin ventana a partir de un HTML).
+  - Fondo blanco fijo: se quitó el modo oscuro.
+  - Para publicar cambios: `python construir.py`, commit y `git push`. GitHub tarda unos 30 s en servirlo.
+
 ## Pendiente
+- Logos de los partidos (falta permiso para descargarlos de Wikimedia Commons).
 - Cuando los partidos publiquen sus programas del 29-N (previsiblemente en noviembre), revisar las posturas.
 - Si Podemos entra en Frente Amplio (plazo de coaliciones: 16/10/2026), decidir si se fusionan o se dejan separados.
