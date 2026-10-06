@@ -1,7 +1,7 @@
 """Construye index.html (la web del test) a partir de plantilla.html y las posturas en datos/pos_*.json.
 
 Uso:  python construir.py
-Comprueba que cada afirmación tiene los 11 partidos y que cada postura es válida antes de escribir nada.
+Comprueba que cada pregunta tiene los 11 partidos y que cada postura es válida antes de escribir nada.
 """
 import glob
 import json
@@ -9,6 +9,9 @@ import os
 import sys
 
 AQUI = os.path.dirname(os.path.abspath(__file__))
+
+# Enlace público del test (el del Artifact en claude.ai). Vacío = se ocultan los botones de compartir.
+SHARE_URL = ""
 
 PARTIES = [
     # Orden alfabético para no dar preferencia a nadie en la portada.
@@ -27,80 +30,103 @@ PARTIES = [
 
 V, E, T, I, A, D, SA, C, X = (
     "Vivienda", "Impuestos", "Trabajo y pensiones", "Inmigración", "Modelo de Estado",
-    "Derechos y sociedad", "Sanidad", "Energía, clima y campo", "Política exterior y defensa",
+    "Derechos y sociedad", "Sanidad", "Energía, clima y campo", "Exterior y defensa",
 )
 
+# Preguntas cortas de sí o no. Los ids enlazan con las posturas de datos/pos_*.json.
+# t3 (IRPF del salario mínimo) se retiró: desde 2025 ya no tributa y casi todos los partidos lo apoyaban.
 STATEMENTS = [
-    {"id": "v1", "topic": V, "text": "El Estado debería poder poner un tope al precio del alquiler en las zonas donde la vivienda está más cara.",
-     "context": "Hoy la ley de vivienda permite limitar alquileres, pero solo en las zonas que la comunidad autónoma declare tensionadas."},
-    {"id": "v2", "topic": V, "text": "Habría que limitar por ley la compra de viviendas que no vayan a ser la residencia habitual del comprador (por ejemplo, para invertir o especular).",
-     "context": ""},
-    {"id": "v3", "topic": V, "text": "Los ayuntamientos deberían poder prohibir nuevos pisos turísticos y reducir los que ya existen para que vuelvan al alquiler normal.",
-     "context": ""},
-    {"id": "v4", "topic": V, "text": "La policía debería poder desalojar en 24 o 48 horas a quien ocupe una vivienda sin permiso, sin esperar a un juicio.",
-     "context": "Hoy, salvo que se le sorprenda entrando, el desalojo necesita la decisión de un juez."},
-    {"id": "v5", "topic": V, "text": "Para abaratar la vivienda hay que liberar suelo y reducir trámites para construir más, en lugar de intervenir en los precios.",
-     "context": ""},
-    {"id": "e1", "topic": E, "text": "Hay que bajar los impuestos en general aunque eso obligue a recortar gasto público.", "context": ""},
-    {"id": "e2", "topic": E, "text": "Debe mantenerse un impuesto especial a las grandes fortunas.",
-     "context": "Es un impuesto estatal sobre patrimonios de más de 3 millones de euros, creado en 2022."},
-    {"id": "e3", "topic": E, "text": "Los bancos y las grandes energéticas deberían pagar un impuesto extra sobre sus beneficios extraordinarios.", "context": ""},
-    {"id": "e4", "topic": E, "text": "El impuesto de sucesiones y donaciones debería suprimirse en toda España.",
-     "context": "Lo gestionan las comunidades autónomas y cada una aplica rebajas distintas."},
-    {"id": "t1", "topic": T, "text": "La jornada laboral máxima debería bajar de 40 a 37,5 horas semanales sin reducción de sueldo.", "context": ""},
-    {"id": "t2", "topic": T, "text": "Despedir sin causa justificada debería costar más a las empresas que ahora (mayor indemnización).",
-     "context": "Hoy un despido improcedente se paga con 33 días de sueldo por año trabajado, con un máximo de 24 mensualidades."},
-    {"id": "t3", "topic": T, "text": "Quien cobra el salario mínimo no debería pagar IRPF.", "context": ""},
-    {"id": "t4", "topic": T, "text": "Para pagar las pensiones, las empresas y los sueldos más altos deberían cotizar más a la Seguridad Social.", "context": ""},
-    {"id": "i1", "topic": I, "text": "Debería regularizarse a los inmigrantes sin papeles que ya viven y trabajan en España.", "context": ""},
-    {"id": "i2", "topic": I, "text": "Los españoles deberían tener prioridad sobre los extranjeros que viven legalmente aquí para recibir ayudas públicas y vivienda social.", "context": ""},
-    {"id": "i3", "topic": I, "text": "Habría que expulsar a los inmigrantes que entraron de forma irregular, aunque lleven años viviendo en España.", "context": ""},
-    {"id": "i4", "topic": I, "text": "Los menores migrantes que llegan solos deberían repartirse de forma obligatoria entre todas las comunidades autónomas.", "context": ""},
-    {"id": "a1", "topic": A, "text": "Cataluña (y otras comunidades que lo pidan) debería recaudar y gestionar todos sus impuestos, como hacen el País Vasco y Navarra.",
-     "context": "El País Vasco y Navarra recaudan sus impuestos y pagan al Estado una cantidad por los servicios comunes."},
-    {"id": "a2", "topic": A, "text": "Debería poder celebrarse un referéndum de independencia pactado si un parlamento autonómico lo pide por mayoría.", "context": ""},
-    {"id": "a3", "topic": A, "text": "La amnistía a los encausados por el proceso independentista catalán fue una buena decisión.",
-     "context": "Ley aprobada en 2024 para los delitos ligados al proceso independentista entre 2011 y 2023."},
-    {"id": "a4", "topic": A, "text": "El Estado debería recuperar competencias que hoy tienen las comunidades autónomas, como la educación o la sanidad.", "context": ""},
-    {"id": "a5", "topic": A, "text": "Las familias deberían poder elegir que sus hijos estudien en castellano en toda España, también en comunidades con otra lengua oficial.", "context": ""},
-    {"id": "a6", "topic": A, "text": "Debería celebrarse un referéndum para elegir entre monarquía y república.", "context": ""},
-    {"id": "a7", "topic": A, "text": "Los propios jueces, y no el Congreso y el Senado, deberían elegir a la mayoría del órgano de gobierno de los jueces (CGPJ).",
-     "context": "El CGPJ nombra, entre otros, a los magistrados del Tribunal Supremo. Hoy sus vocales los eligen el Congreso y el Senado."},
-    {"id": "s1", "topic": D, "text": "El derecho al aborto debería incluirse en la Constitución.",
-     "context": "Hoy el aborto es legal a petición de la mujer hasta la semana 14 por ley, pero no figura en la Constitución."},
-    {"id": "s2", "topic": D, "text": "Debería derogarse la ley de eutanasia.", "context": "La ley, de 2021, permite pedir ayuda para morir en casos de enfermedad grave e incurable."},
-    {"id": "s3", "topic": D, "text": "La ley de violencia de género debería sustituirse por una ley de violencia intrafamiliar que no distinga si la víctima es hombre o mujer.",
-     "context": "La ley actual, de 2004, protege específicamente a las mujeres frente a la violencia de sus parejas o exparejas."},
-    {"id": "s4", "topic": D, "text": "Debería derogarse la Ley de Memoria Democrática.",
-     "context": "Ley de 2022 sobre las víctimas de la Guerra Civil y la dictadura: exhumaciones, retirada de símbolos franquistas, etc."},
-    {"id": "s5", "topic": D, "text": "Las corridas de toros deberían dejar de recibir protección y ayudas públicas como patrimonio cultural.", "context": ""},
-    {"id": "p1", "topic": SA, "text": "La sanidad pública debería reducir los conciertos con clínicas y hospitales privados.", "context": ""},
-    {"id": "c1", "topic": C, "text": "Las centrales nucleares deberían seguir funcionando más allá de las fechas de cierre previstas.",
-     "context": "El calendario actual prevé cerrarlas todas entre 2027 y 2035."},
-    {"id": "c2", "topic": C, "text": "España debería apoyar el acuerdo comercial entre la Unión Europea y los países de Mercosur (Brasil, Argentina, Uruguay y Paraguay).",
-     "context": "Facilita exportar coches, maquinaria o vino a Sudamérica y abre el mercado europeo a más carne y productos agrícolas de allí."},
-    {"id": "c3", "topic": C, "text": "Hay que cumplir los objetivos climáticos de la UE aunque encarezcan algunas actividades, como el transporte o el campo.", "context": ""},
-    {"id": "x1", "topic": X, "text": "España debería subir el gasto en defensa hasta el nivel que pide la OTAN.",
-     "context": "En 2025 la OTAN fijó llegar al 5 % del PIB en 2035. España se desmarcó y se compromete con alrededor del 2,1 %."},
-    {"id": "x2", "topic": X, "text": "España debería mantener o endurecer el embargo de armas y las sanciones contra Israel.", "context": ""},
-    {"id": "x3", "topic": X, "text": "España debería seguir enviando ayuda militar a Ucrania.", "context": ""},
+    {"id": "v1", "topic": V, "text": "¿Poner un tope al precio del alquiler en las zonas donde está más caro?",
+     "context": "Hoy la ley solo lo permite en las zonas que cada comunidad autónoma declare tensionadas."},
+    {"id": "v2", "topic": V, "text": "¿Limitar por ley la compra de viviendas para invertir o especular, y no para vivir en ellas?", "context": ""},
+    {"id": "v3", "topic": V, "text": "¿Que los ayuntamientos puedan prohibir pisos turísticos nuevos y reducir los que ya hay?", "context": ""},
+    {"id": "v4", "topic": V, "text": "¿Desalojar en 24 o 48 horas a quien ocupe una vivienda sin permiso, sin esperar a un juicio completo?",
+     "context": "Hoy el desalojo lo ordena un juez y el proceso puede alargarse meses."},
+    {"id": "v5", "topic": V, "text": "Para abaratar la vivienda, ¿es mejor construir más con menos trámites que limitar los precios?", "context": ""},
+    {"id": "e1", "topic": E, "text": "¿Bajar los impuestos aunque haya que recortar gasto público?", "context": ""},
+    {"id": "e2", "topic": E, "text": "¿Mantener el impuesto a las grandes fortunas?",
+     "context": "Impuesto estatal sobre patrimonios de más de 3 millones de euros, creado en 2022."},
+    {"id": "e3", "topic": E, "text": "¿Un impuesto extra a los bancos y a las grandes energéticas por sus beneficios?", "context": ""},
+    {"id": "e4", "topic": E, "text": "¿Eliminar el impuesto de sucesiones (herencias) en toda España?",
+     "context": "Lo cobran las comunidades autónomas y cada una aplica rebajas distintas."},
+    {"id": "t1", "topic": T, "text": "¿Bajar la jornada laboral máxima a 37,5 horas semanales sin bajar el sueldo?",
+     "context": "Hoy el máximo son 40 horas semanales."},
+    {"id": "t2", "topic": T, "text": "¿Que despedir sin causa justificada les cueste más a las empresas?",
+     "context": "Hoy se paga con 33 días de sueldo por año trabajado, con un máximo de 24 mensualidades."},
+    {"id": "t4", "topic": T, "text": "¿Que las empresas y los sueldos más altos coticen más para pagar las pensiones?", "context": ""},
+    {"id": "i1", "topic": I, "text": "¿Hacer una regularización extraordinaria de los inmigrantes sin papeles que ya viven y trabajan aquí?", "context": ""},
+    {"id": "i2", "topic": I, "text": "¿Que los españoles tengan prioridad sobre los extranjeros residentes en ayudas y vivienda social?", "context": ""},
+    {"id": "i3", "topic": I, "text": "¿Expulsar a los inmigrantes que entraron de forma irregular, aunque lleven años aquí?", "context": ""},
+    {"id": "i4", "topic": I, "text": "¿Repartir de forma obligatoria entre todas las comunidades a los menores migrantes que llegan solos?", "context": ""},
+    {"id": "a1", "topic": A, "text": "¿Que las comunidades que lo pidan recauden todos sus impuestos, como el País Vasco y Navarra?",
+     "context": "Cataluña lo reclama. El País Vasco y Navarra recaudan sus impuestos y pagan al Estado una cantidad por los servicios comunes."},
+    {"id": "a2", "topic": A, "text": "¿Permitir un referéndum de independencia pactado con el Estado si una comunidad lo pide?", "context": ""},
+    {"id": "a3", "topic": A, "text": "¿Fue acertada la amnistía del procés catalán?",
+     "context": "Ley de 2024 para los delitos ligados al proceso independentista catalán de 2011 a 2023."},
+    {"id": "a4", "topic": A, "text": "¿Que el Estado recupere competencias de las comunidades, como la educación o la sanidad?", "context": ""},
+    {"id": "a5", "topic": A, "text": "¿Que las familias puedan elegir el castellano como lengua principal en el colegio, en toda España?",
+     "context": "También en Galicia, Cataluña, el País Vasco y demás comunidades con otra lengua oficial."},
+    {"id": "a6", "topic": A, "text": "¿Un referéndum para elegir entre monarquía y república?", "context": ""},
+    {"id": "a7", "topic": A, "text": "¿Que los propios jueces elijan a los vocales jueces del CGPJ, en vez del Congreso y el Senado?",
+     "context": "El CGPJ gobierna a los jueces y nombra a los del Tribunal Supremo. 12 de sus 20 vocales son jueces."},
+    {"id": "s1", "topic": D, "text": "¿Incluir el derecho al aborto en la Constitución?",
+     "context": "Hoy es legal a petición de la mujer hasta la semana 14, por ley."},
+    {"id": "s2", "topic": D, "text": "¿Derogar la ley de eutanasia?",
+     "context": "Ley de 2021 que permite pedir ayuda para morir con una enfermedad grave e incurable."},
+    {"id": "s3", "topic": D, "text": "¿Cambiar la ley de violencia de género por una de violencia intrafamiliar, sin distinguir entre hombres y mujeres?",
+     "context": "La ley actual, de 2004, protege específicamente a las mujeres frente a sus parejas o exparejas."},
+    {"id": "s4", "topic": D, "text": "¿Derogar la Ley de Memoria Democrática?",
+     "context": "Ley de 2022 sobre las víctimas de la Guerra Civil y el franquismo: exhumaciones, retirada de símbolos, etc."},
+    {"id": "s5", "topic": D, "text": "¿Quitar a los toros la protección y las ayudas públicas como patrimonio cultural?", "context": ""},
+    {"id": "p1", "topic": SA, "text": "¿Reducir los conciertos de la sanidad pública con empresas privadas?",
+     "context": "Son pagos a clínicas privadas para que atiendan a pacientes de la pública, por ejemplo para bajar listas de espera."},
+    {"id": "c1", "topic": C, "text": "¿Alargar la vida de las centrales nucleares?",
+     "context": "El plan vigente es cerrarlas todas en 2035. En agosto de 2026 se prorrogó Almaraz hasta 2030."},
+    {"id": "c2", "topic": C, "text": "¿Apoyar el acuerdo comercial de la UE con Mercosur (Brasil, Argentina, Uruguay y Paraguay)?",
+     "context": "Se firmó en enero de 2026 y falta ratificarlo. Facilita vender allí coches, maquinaria o vino, y abre Europa a más carne y productos agrícolas sudamericanos."},
+    {"id": "c3", "topic": C, "text": "¿Cumplir los objetivos climáticos de la UE aunque encarezcan el transporte o el campo?", "context": ""},
+    {"id": "x1", "topic": X, "text": "¿Subir el gasto en defensa hasta lo que pide la OTAN?",
+     "context": "La OTAN pide llegar al 5 % del PIB en 2035. España se desmarcó y se queda en torno al 2,1 %."},
+    {"id": "x2", "topic": X, "text": "¿Mantener o endurecer el embargo de armas y las sanciones a Israel?", "context": ""},
+    {"id": "x3", "topic": X, "text": "¿Seguir enviando ayuda militar a Ucrania?", "context": ""},
 ]
 
 NOTES = [
     "Los programas electorales del 29-N aún no están publicados. Las posturas salen de votaciones en el Congreso desde 2023, de los programas de 2023 y de declaraciones públicas recogidas hasta el 6 de octubre de 2026. Cuando salgan los programas conviene actualizar el test.",
     "Frente Amplio es la candidatura que preparan Sumar, IU, Más Madrid y Comuns; se usan las posturas de Sumar. Podemos negocia todavía si se une (el plazo para formar coaliciones acaba el 16 de octubre), así que aquí aparecen por separado.",
-    "SALF no tiene diputados en el Congreso, así que de él hay menos datos y su porcentaje se calcula con menos afirmaciones.",
+    "SALF no tiene diputados en el Congreso, así que de él hay menos datos y su porcentaje se calcula con menos preguntas.",
     "Faltan partidos más pequeños o de una sola provincia o comunidad, como Coalición Canaria o UPN.",
-    "Unas pocas decenas de afirmaciones no recogen un programa entero. Úsalo como punto de partida para informarte, no como recomendación de voto.",
+    "Unas decenas de preguntas no recogen un programa entero. Úsalo como punto de partida para informarte, no como recomendación de voto.",
     "Es un test independiente y no oficial: no lo ha hecho ni encargado ningún partido ni institución. Las posturas las ha recopilado y resumido una inteligencia artificial (Claude) a partir de las fuentes públicas que se enlazan en cada una, y pueden contener errores.",
 ]
 
 METHOD = [
-    "Cada respuesta tuya se compara con la postura del partido en la misma escala de cinco puntos, de «muy de acuerdo» a «muy en desacuerdo».",
-    "Coincidir del todo suma 100 %. Cada punto de distancia resta 25 %, así que estar en extremos opuestos suma 0 %.",
-    "Los temas que marcas como importantes cuentan doble. Las afirmaciones que saltas no cuentan.",
-    "Si de un partido no consta postura sobre una afirmación, esa afirmación no cuenta para ese partido.",
+    "Las posturas de los partidos se clasifican en cinco niveles: a favor, a favor con matices, ambiguo, en contra con matices y en contra. Tu «Sí» equivale a «a favor», tu «No» a «en contra» y tu «Depende» al punto medio.",
+    "Coincidir del todo suma 100 %. Cada nivel de distancia resta 25 %: un «Sí» frente a un partido «a favor con matices» suma 75 %, y un «Sí» frente a uno «en contra» suma 0 %.",
+    "Las preguntas que marcas con «Me importa mucho» cuentan doble. Las que saltas no cuentan.",
+    "Si de un partido no consta postura sobre una pregunta, esa pregunta no cuenta para ese partido.",
 ]
+
+# Congreso que salió de las generales de 2023 (escaños comprobados en es.wikipedia.org, suman 350).
+# Orden aproximado de izquierda a derecha, como en los gráficos habituales. Colores de Wikipedia salvo
+# PSOE, Sumar y Junts, con su color de marca habitual.
+CHAMBER = {
+    "title": "Así quedó el Congreso en las elecciones de 2023",
+    "blocks": [
+        {"short": "Sumar", "seats": 31, "color": "#E51C55"},
+        {"short": "ERC", "seats": 7, "color": "#FFB232"},
+        {"short": "EH Bildu", "seats": 6, "color": "#B5CF18"},
+        {"short": "BNG", "seats": 1, "color": "#ADCFEF"},
+        {"short": "PSOE", "seats": 121, "color": "#EF1C27"},
+        {"short": "PNV", "seats": 5, "color": "#4AAE4A"},
+        {"short": "CC", "seats": 1, "color": "#FFD700"},
+        {"short": "Junts", "seats": 7, "color": "#20C0B2"},
+        {"short": "UPN", "seats": 1, "color": "#00599B"},
+        {"short": "PP", "seats": 137, "color": "#1D84CE"},
+        {"short": "Vox", "seats": 33, "color": "#63BE21"},
+    ],
+}
+assert sum(b["seats"] for b in CHAMBER["blocks"]) == 350
 
 FOOTER = "Posturas recogidas el 6 de octubre de 2026 · Test independiente, sin relación con ningún partido ni institución."
 
@@ -117,7 +143,7 @@ def main():
     for s in STATEMENTS:
         sid = s["id"]
         if sid not in positions:
-            errores.append(f"Falta la afirmación {sid}")
+            errores.append(f"Falta la pregunta {sid}")
             continue
         limpio[sid] = {}
         for pid in pids:
@@ -137,7 +163,7 @@ def main():
         sys.exit(1)
 
     data = {"parties": PARTIES, "statements": STATEMENTS, "positions": limpio,
-            "notes": NOTES, "method": METHOD, "footer": FOOTER}
+            "notes": NOTES, "method": METHOD, "footer": FOOTER, "shareUrl": SHARE_URL, "chamber": CHAMBER}
     with open(os.path.join(AQUI, "plantilla.html"), encoding="utf-8") as fh:
         html = fh.read()
     marca = "/*DATA*/null"
@@ -148,7 +174,7 @@ def main():
         fh.write(html)
 
     nulos = sum(1 for sid in limpio for pid in limpio[sid] if limpio[sid][pid]["pos"] is None)
-    print(f"OK: index.html con {len(STATEMENTS)} afirmaciones x {len(PARTIES)} partidos; {nulos} celdas sin postura.")
+    print(f"OK: index.html con {len(STATEMENTS)} preguntas x {len(PARTIES)} partidos; {nulos} celdas sin postura.")
 
 
 if __name__ == "__main__":

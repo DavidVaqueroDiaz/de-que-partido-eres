@@ -1,265 +1,314 @@
-<title>Afinidad 29-N</title>
+<title>¿De qué partido eres?</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,600&family=Atkinson+Hyperlegible:wght@400;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Atkinson+Hyperlegible:wght@400;700&family=IBM+Plex+Mono:wght@500&display=swap">
 <style>
-/* Layout: una sola columna estrecha, como una papeleta; la afirmación manda y todo lo demás se aparta. */
+/* Layout: cartel electoral en una columna; el hemiciclo de 350 escaños es la portada y la barra de progreso.
+   Ningún color de partido: el arcoíris completo del hemiciclo representa a todos por igual. */
 :root {
-  --paper: #f7f7f4;
+  --paper: #f3f2ee;
   --card: #ffffff;
-  --ink: #1d2025;
-  --muted: #5b6168;
-  --rule: #d9d8d2;
-  --sepia: #7b5a2c;        /* el color de la papeleta del Senado */
-  --sepia-soft: #f0e8da;
-  --sepia-ink: #5e4420;
-  --chip: #eceae4;
-  --warn: #8a4b12;
-  --f-display: "Newsreader", "Georgia", "Times New Roman", serif;
+  --ink: #15171c;
+  --muted: #5d626a;
+  --rule: #dcdad3;
+  --chip: #e9e7e1;
+  --seat-off: #d9d6ce;
+  --focus: #d9890b;
+  --spectrum: linear-gradient(90deg, #df5a35, #eda21b 26%, #2aa58a 52%, #3f6fe0 76%, #8d5bd6);
+  --f-display: "Archivo", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
   --f-body: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
   --f-data: "IBM Plex Mono", ui-monospace, "Consolas", monospace;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --paper: #141619; --card: #1b1e22; --ink: #e8e6e1; --muted: #9da2a9; --rule: #2e3237;
-    --sepia: #d4ad72; --sepia-soft: #2b251c; --sepia-ink: #e7c48f; --chip: #262a2f; --warn: #e3a066;
+    --paper: #101216; --card: #191c21; --ink: #eeece7; --muted: #9ca1a9; --rule: #2b2f36;
+    --chip: #23272e; --seat-off: #2a2e36; --focus: #f2b13c;
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --paper: #141619; --card: #1b1e22; --ink: #e8e6e1; --muted: #9da2a9; --rule: #2e3237;
-  --sepia: #d4ad72; --sepia-soft: #2b251c; --sepia-ink: #e7c48f; --chip: #262a2f; --warn: #e3a066;
+  --paper: #101216; --card: #191c21; --ink: #eeece7; --muted: #9ca1a9; --rule: #2b2f36;
+  --chip: #23272e; --seat-off: #2a2e36; --focus: #f2b13c;
   color-scheme: dark;
 }
 
 * { box-sizing: border-box; }
 body {
   background: var(--paper); color: var(--ink);
-  font-family: var(--f-body); font-size: 17px; line-height: 1.55;
-  padding-inline: 16px; padding-block: 28px 64px;
+  font-family: var(--f-body); font-size: 17px; line-height: 1.5;
+  padding-inline: 16px; padding-block: 22px 64px;
 }
-.wrap { max-width: 680px; margin: 0 auto; display: grid; gap: 28px; }
-.eyebrow {
-  font-family: var(--f-data); font-size: 12px; letter-spacing: .08em; text-transform: uppercase;
-  color: var(--muted); display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center;
+.wrap { max-width: 640px; margin: 0 auto; display: grid; gap: 26px; }
+h1, h2, h3, .poster {
+  font-family: var(--f-display); font-stretch: 68%; font-weight: 850; text-transform: uppercase;
+  letter-spacing: .005em; line-height: .95; margin: 0; text-wrap: balance;
 }
-.eyebrow b { color: var(--sepia); font-weight: 500; }
-h1, h2, h3 { font-family: var(--f-display); font-weight: 600; text-wrap: balance; margin: 0; line-height: 1.15; }
-h1 { font-size: clamp(32px, 7vw, 46px); letter-spacing: -.01em; }
-h2 { font-size: clamp(26px, 5vw, 32px); }
-h3 { font-size: 20px; }
+h1 { font-size: clamp(46px, 13vw, 84px); }
+h2 { font-size: clamp(34px, 8vw, 48px); }
+h3 { font-size: 24px; }
 p { margin: 0; }
-a { color: var(--sepia-ink); }
+a { color: inherit; text-underline-offset: 3px; }
 .muted { color: var(--muted); }
 .small { font-size: 14px; }
+.label { font-family: var(--f-data); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.spectrum-text { background: var(--spectrum); -webkit-background-clip: text; background-clip: text; color: transparent; }
 
 button { font: inherit; color: inherit; cursor: pointer; }
-button:focus-visible, select:focus-visible, summary:focus-visible, a:focus-visible, input:focus-visible + span {
-  outline: 3px solid var(--sepia); outline-offset: 2px;
-}
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
 .btn {
-  border: 1.5px solid var(--ink); background: var(--ink); color: var(--paper);
-  padding: 12px 22px; border-radius: 6px; font-weight: 700;
+  border: 2px solid var(--ink); background: var(--ink); color: var(--paper);
+  padding: 13px 24px; border-radius: 999px; font-weight: 700; font-size: 17px;
+  display: inline-flex; gap: 10px; align-items: center; text-decoration: none;
+  transition: transform .15s;
 }
+.btn:hover { transform: translateY(-1px); }
+.btn:active { transform: scale(.97); }
+.btn.big { padding: 16px 34px; font-size: 19px; }
 .btn.ghost { background: transparent; color: var(--ink); border-color: var(--rule); font-weight: 400; }
-.btn:hover { filter: brightness(1.12); }
-.btn.ghost:hover { border-color: var(--ink); filter: none; }
+.btn.ghost:hover { border-color: var(--ink); }
+.btn svg { width: 20px; height: 20px; flex: none; }
 .row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.linkbtn { background: none; border: 0; padding: 8px 2px; color: var(--muted); font-size: 15px; text-decoration: underline; text-underline-offset: 3px; }
+.linkbtn:hover { color: var(--ink); }
+.linkbtn[disabled] { opacity: .3; cursor: default; }
+
+/* ---------- Hemiciclo ---------- */
+.hemi { width: 100%; height: auto; display: block; overflow: visible; }
+.hemi circle { transition: fill .35s; }
+.hemi circle.off { fill: var(--seat-off) !important; }
+.hemi.intro circle { animation: seat .5s backwards cubic-bezier(.2,.8,.2,1); }
+@keyframes seat { from { transform: scale(.2); opacity: 0; } }
+.hemi circle { transform-box: fill-box; transform-origin: center; }
 
 /* ---------- Portada ---------- */
-.intro { display: grid; gap: 22px; }
-.intro .lead { font-size: 19px; max-width: 60ch; }
-.facts { display: flex; flex-wrap: wrap; gap: 8px; }
-.facts span {
-  font-family: var(--f-data); font-size: 13px; padding: 5px 10px;
-  border: 1px solid var(--rule); border-radius: 999px; color: var(--muted);
+.chamber { margin: 0; display: grid; gap: 10px; justify-items: center; width: 100%; }
+.chamber figcaption { display: grid; gap: 8px; justify-items: center; }
+.legend-seats { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 4px 12px; justify-content: center; font-size: 13px; max-width: 460px; }
+.legend-seats li { display: inline-flex; align-items: center; gap: 5px; white-space: nowrap; }
+.legend-seats i { width: 10px; height: 10px; border-radius: 50%; flex: none; }
+.legend-seats b { font-family: var(--f-data); font-weight: 500; color: var(--muted); }
+.hero { display: grid; gap: 18px; text-align: center; justify-items: center; }
+.hero .hemi-box { width: min(100%, 460px); position: relative; }
+.hero .hemi-cap {
+  position: absolute; left: 0; right: 0; bottom: 2px; display: grid; gap: 2px; justify-items: center;
 }
-.parties-line { font-size: 15px; color: var(--muted); }
+.hero .hemi-cap b { font-family: var(--f-display); font-stretch: 68%; font-weight: 850; font-size: clamp(40px, 11vw, 64px); line-height: .9; }
+.hero .lead { font-size: 19px; max-width: 34ch; }
+.facts { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+.facts span { font-size: 14px; padding: 6px 12px; border-radius: 999px; background: var(--chip); }
+.parties-line { font-size: 14px; color: var(--muted); max-width: 52ch; }
 details.note { border-top: 1px solid var(--rule); padding-top: 14px; }
 details.note summary { cursor: pointer; font-weight: 700; }
-details.note .body { display: grid; gap: 10px; padding-top: 10px; font-size: 15px; color: var(--muted); max-width: 64ch; }
+details.note .body { display: grid; gap: 10px; padding-top: 10px; font-size: 15px; color: var(--muted); }
 
 /* ---------- Test ---------- */
-.ticks { display: grid; grid-template-columns: repeat(var(--n), 1fr); gap: 3px; }
-.tick {
-  height: 8px; border-radius: 2px; border: 0; padding: 0; background: var(--chip);
-}
-.tick.done { background: var(--sepia); }
-.tick.skip { background: transparent; box-shadow: inset 0 0 0 1px var(--muted); }
-.tick.now { outline: 2px solid var(--ink); outline-offset: 1px; }
-.qhead { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
-.counter { font-family: var(--f-data); font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
-
+.quiz { display: grid; gap: 16px; }
+.qtop { display: grid; grid-template-columns: 112px minmax(0, 1fr); gap: 14px; align-items: end; }
+.qtop .meta { display: grid; gap: 4px; }
+.qtop .count { font-family: var(--f-display); font-stretch: 68%; font-weight: 850; font-size: 34px; line-height: 1; font-variant-numeric: tabular-nums; }
+.qtop .count small { font-size: 20px; color: var(--muted); }
+.topic { display: inline-block; font-size: 13px; font-weight: 700; padding: 3px 10px; border-radius: 999px; background: var(--ink); color: var(--paper); justify-self: start; }
 .card {
-  background: var(--card); border: 1px solid var(--rule); border-radius: 10px;
-  padding: clamp(20px, 5vw, 34px); display: grid; gap: 18px;
+  background: var(--card); border: 1px solid var(--rule); border-radius: 18px;
+  padding: clamp(22px, 6vw, 36px); display: grid; gap: 16px; position: relative; overflow: hidden;
 }
-.statement { font-family: var(--f-display); font-size: clamp(23px, 4.6vw, 30px); line-height: 1.25; font-weight: 400; text-wrap: pretty; }
-.context { font-size: 15px; color: var(--muted); border-left: 2px solid var(--sepia-soft); padding-left: 12px; max-width: 60ch; }
+.card::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 5px; background: var(--spectrum); }
+.card.enter { animation: enter .28s cubic-bezier(.2,.8,.2,1); }
+@keyframes enter { from { opacity: 0; transform: translateX(18px); } }
+.question { font-size: clamp(24px, 6vw, 31px); font-weight: 700; line-height: 1.2; text-wrap: pretty; }
+.context { font-size: 15px; color: var(--muted); }
 
-.answers { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+.answers { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-top: 4px; }
 .ans {
-  border: 1.5px solid var(--rule); background: var(--paper); border-radius: 8px;
-  padding: 12px 6px; font-size: 15px; line-height: 1.2; min-height: 64px;
-  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; text-align: center;
-  transition: border-color .12s, background-color .12s, transform .12s;
+  border: 2px solid var(--rule); background: var(--paper); border-radius: 14px;
+  padding: 14px 4px 12px; min-height: 84px;
+  display: grid; justify-items: center; align-content: center; gap: 6px;
+  font-family: var(--f-display); font-stretch: 75%; font-weight: 800; font-size: 22px; text-transform: uppercase; line-height: 1;
+  transition: border-color .12s, background-color .12s, color .12s, transform .12s;
 }
-.ans .dot { width: 14px; height: 14px; border-radius: 50%; border: 1.5px solid var(--sepia); }
-.ans[data-v="2"] .dot, .ans[data-v="-2"] .dot { background: var(--sepia); }
-.ans[data-v="1"] .dot, .ans[data-v="-1"] .dot { background: var(--sepia-soft); }
-.ans[data-v="0"] .dot { border-style: dashed; }
+.ans svg { width: 26px; height: 26px; }
 .ans:hover { border-color: var(--ink); }
-.ans:active { transform: scale(.98); }
-.ans[aria-pressed="true"] { border-color: var(--sepia); background: var(--sepia-soft); font-weight: 700; color: var(--sepia-ink); }
-.qfoot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; align-items: center; }
-.imp { display: inline-flex; gap: 10px; align-items: center; cursor: pointer; font-size: 15px; }
-.imp input { position: absolute; opacity: 0; width: 1px; height: 1px; }
-.imp .box {
-  width: 22px; height: 22px; border: 1.5px solid var(--muted); border-radius: 4px;
-  display: grid; place-items: center; font-family: var(--f-data); font-size: 11px; color: transparent;
+.ans:active { transform: scale(.96); }
+.ans[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+.ans[data-v="0"] { font-weight: 600; }
+.qfoot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 12px; align-items: center; }
+.imp {
+  display: inline-flex; gap: 8px; align-items: center; cursor: pointer; font-size: 15px;
+  border: 1.5px solid var(--rule); border-radius: 999px; padding: 6px 14px 6px 10px; background: none;
 }
-.imp input:checked + .box { background: var(--sepia); border-color: var(--sepia); color: var(--card); }
-.linkbtn { background: none; border: 0; padding: 6px 2px; color: var(--muted); text-decoration: underline; text-underline-offset: 3px; font-size: 15px; }
-.linkbtn:hover { color: var(--ink); }
-.linkbtn[disabled] { opacity: .35; cursor: default; text-decoration: none; }
+.imp svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; }
+.imp[aria-pressed="true"] { border-color: var(--focus); color: var(--ink); }
+.imp[aria-pressed="true"] svg { fill: var(--focus); stroke: var(--focus); }
 .keys { font-family: var(--f-data); font-size: 12px; color: var(--muted); }
+.qnav { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
 
-/* ---------- Resultados ---------- */
-.res-head { display: grid; gap: 10px; }
+/* ---------- Resultado ---------- */
+.results { display: grid; gap: 30px; }
+.winner {
+  background: var(--ink); color: var(--paper); border-radius: 20px; padding: clamp(22px, 6vw, 34px);
+  display: grid; gap: 8px; position: relative; overflow: hidden;
+}
+.winner::after { content: ""; position: absolute; inset: auto 0 0 0; height: 8px; background: var(--spectrum); }
+.winner .label { color: inherit; opacity: .7; }
+.winner .who { font-family: var(--f-display); font-stretch: 68%; font-weight: 850; text-transform: uppercase; font-size: clamp(40px, 11vw, 66px); line-height: .92; text-wrap: balance; }
+.winner .pct { font-family: var(--f-display); font-stretch: 68%; font-weight: 850; font-size: clamp(64px, 20vw, 120px); line-height: .85; font-variant-numeric: tabular-nums; }
+.winner .sub { font-size: 15px; opacity: .8; max-width: 46ch; }
 .filter { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; font-size: 15px; }
-.filter select {
-  font: inherit; color: var(--ink); background: var(--card); border: 1px solid var(--rule);
-  border-radius: 6px; padding: 7px 10px;
-}
-.ranking { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.filter select { font: inherit; color: var(--ink); background: var(--card); border: 1px solid var(--rule); border-radius: 999px; padding: 7px 14px; }
+.ranking { list-style: none; margin: 0; padding: 0; display: grid; }
 .rank {
-  display: grid; grid-template-columns: 30px minmax(0, 1fr) 64px; gap: 4px 12px; align-items: center;
-  padding: 12px 0; border-bottom: 1px solid var(--rule);
+  display: grid; grid-template-columns: 26px minmax(0, 1fr) 70px; gap: 6px 12px; align-items: center;
+  padding: 14px 0; border-bottom: 1px solid var(--rule);
 }
-.rank .pos { font-family: var(--f-data); font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.rank .pos { font-family: var(--f-data); font-size: 13px; color: var(--muted); }
 .rank .name { display: flex; flex-wrap: wrap; gap: 2px 10px; align-items: baseline; min-width: 0; }
-.rank .name strong { font-size: 18px; }
+.rank .name strong { font-size: 19px; }
 .rank .name .full { font-size: 13px; color: var(--muted); }
-.rank .pct { font-family: var(--f-data); font-size: 22px; font-weight: 500; text-align: right; font-variant-numeric: tabular-nums; }
-.rank .bar { grid-column: 2 / 4; height: 10px; background: var(--chip); border-radius: 3px; overflow: hidden; }
-.rank .bar i { display: block; height: 100%; background: var(--sepia); border-radius: 3px; width: 0; transition: width .6s cubic-bezier(.2,.7,.2,1); }
-.rank:first-child .bar i { background: var(--ink); }
+.rank .pct { font-family: var(--f-display); font-stretch: 68%; font-weight: 850; font-size: 32px; line-height: 1; text-align: right; font-variant-numeric: tabular-nums; }
+.rank .bar { grid-column: 2 / 4; height: 12px; background: var(--chip); border-radius: 999px; overflow: hidden; }
+.rank .bar i { display: block; height: 100%; width: 0; border-radius: 999px; background: var(--spectrum); background-size: 640px 100%; transition: width .8s cubic-bezier(.2,.7,.2,1); }
 .rank .meta { grid-column: 2 / 4; font-size: 13px; color: var(--muted); }
-.rank .meta .warn { color: var(--warn); }
-.scope { font-family: var(--f-data); font-size: 11px; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--rule); border-radius: 4px; padding: 1px 6px; }
+.rank .warn { color: var(--focus); }
+.rank.low .bar i { background: var(--muted); }
+.rank.low .pct { color: var(--muted); }
+.scope { font-family: var(--f-data); font-size: 11px; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); border: 1px solid var(--rule); border-radius: 999px; padding: 1px 8px; }
 
-.breakdown { display: grid; gap: 14px; }
-.stmt { background: var(--card); border: 1px solid var(--rule); border-radius: 10px; padding: 18px; display: grid; gap: 12px; }
-.stmt .t { font-family: var(--f-display); font-size: 19px; line-height: 1.3; }
+.share { background: var(--card); border: 1px solid var(--rule); border-radius: 18px; padding: 20px; display: grid; gap: 12px; }
+.wa { background: #1f9e55; border-color: #1f9e55; color: #fff; }
+.copied { font-size: 14px; color: var(--muted); }
+
+.breakdown { display: grid; gap: 12px; }
+.topic-head { margin-top: 12px; }
+.stmt { background: var(--card); border: 1px solid var(--rule); border-radius: 16px; padding: 18px; display: grid; gap: 12px; }
+.stmt .q { font-weight: 700; font-size: 18px; line-height: 1.3; }
 .stmt .you { font-size: 14px; color: var(--muted); }
-.stmt .you b { color: var(--sepia-ink); }
-.strip-scroll { overflow-x: auto; }
-.strip { display: grid; grid-template-columns: repeat(5, minmax(96px, 1fr)); gap: 4px; min-width: 500px; }
-.col { background: var(--paper); border-radius: 6px; padding: 8px 6px; display: grid; align-content: start; gap: 6px; min-height: 64px; border: 1.5px solid transparent; }
-.col.mine { border-color: var(--sepia); background: var(--sepia-soft); }
-.col .lab { font-size: 11px; font-family: var(--f-data); text-transform: uppercase; letter-spacing: .04em; color: var(--muted); text-align: center; }
-.col.mine .lab { color: var(--sepia-ink); font-weight: 500; }
+.stmt .you b { color: var(--ink); }
+.strip { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+.col { background: var(--paper); border-radius: 12px; padding: 8px 6px 10px; display: grid; align-content: start; gap: 8px; border: 2px solid transparent; }
+.col.mine { border-color: var(--ink); }
+.col .lab { font-family: var(--f-display); font-stretch: 75%; font-weight: 800; text-transform: uppercase; font-size: 15px; text-align: center; }
+.col .lab small { display: block; font-family: var(--f-body); font-stretch: 100%; font-weight: 400; text-transform: none; font-size: 11px; color: var(--muted); }
 .chips { display: flex; flex-wrap: wrap; gap: 4px; justify-content: center; }
-.chip { font-size: 12px; font-weight: 700; padding: 2px 7px; border-radius: 4px; background: var(--card); border: 1px solid var(--rule); white-space: nowrap; }
-.nodata { font-size: 13px; color: var(--muted); }
-.stmt details summary { cursor: pointer; font-size: 14px; color: var(--sepia-ink); }
-.why { list-style: none; margin: 10px 0 0; padding: 0; display: grid; gap: 8px; font-size: 14px; }
-.why li { display: grid; grid-template-columns: 74px minmax(0, 1fr); gap: 10px; }
-.why li b { font-size: 13px; }
+.chip { font-size: 12px; font-weight: 700; padding: 2px 8px; border-radius: 999px; background: var(--card); border: 1.5px solid var(--ink); white-space: nowrap; }
+.chip.soft { border-style: dashed; border-color: var(--muted); font-weight: 400; }
+.nodata, .legend { font-size: 13px; color: var(--muted); }
+.stmt details summary { cursor: pointer; font-size: 14px; font-weight: 700; }
+.why { list-style: none; margin: 10px 0 0; padding: 0; display: grid; gap: 9px; font-size: 14px; }
+.why li { display: grid; grid-template-columns: 82px minmax(0, 1fr); gap: 10px; }
 .why .conf { font-family: var(--f-data); font-size: 11px; color: var(--muted); }
-.topic-head { font-family: var(--f-data); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--sepia); margin-top: 10px; }
-
-.method { display: grid; gap: 10px; font-size: 15px; color: var(--muted); max-width: 64ch; }
-.method h3 { color: var(--ink); }
+.method { display: grid; gap: 10px; font-size: 15px; color: var(--muted); }
+.method h3 { color: var(--ink); margin-top: 6px; }
 footer { font-size: 13px; color: var(--muted); border-top: 1px solid var(--rule); padding-top: 14px; }
 
-@media (max-width: 560px) {
+@media (max-width: 520px) {
   body { font-size: 16px; }
-  .answers { grid-template-columns: 1fr; }
-  .ans { flex-direction: row; justify-content: flex-start; min-height: 0; padding: 13px 14px; gap: 12px; text-align: left; }
   .keys { display: none; }
+  .qtop { grid-template-columns: 92px minmax(0, 1fr); }
+  .ans { font-size: 19px; min-height: 78px; }
+  .why li { grid-template-columns: 1fr; gap: 2px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  * { transition: none !important; animation: none !important; }
+  *, *::before, *::after { transition: none !important; animation: none !important; }
 }
 </style>
 
 <div class="wrap">
-  <header class="eyebrow"><span><b>Elecciones generales</b></span><span>29 de noviembre de 2026</span><span>Test independiente y no oficial</span></header>
 
   <!-- Portada -->
-  <section id="s-intro" class="intro">
-    <h1>¿Con qué partido coincides más?</h1>
-    <p class="lead">Aquí tienes <span id="n-st">36</span> propuestas que hoy defienden los partidos, sin decir de quién es cada una. Marca tu postura en cada una. Al terminar verás qué porcentaje coincides con cada partido y quién defiende qué.</p>
-    <div class="facts"><span id="f-n">36 afirmaciones</span><span>unos 6 minutos</span><span>tus respuestas no salen de este navegador</span></div>
-    <p class="parties-line" id="parties-line"></p>
-    <div class="row">
-      <button class="btn" id="b-start">Empezar</button>
+  <section id="s-intro" class="hero">
+    <span class="label">Elecciones generales · 29 de noviembre de 2026</span>
+    <figure class="chamber">
+      <div class="hemi-box">
+        <svg class="hemi intro" id="hemi-intro" viewBox="0 0 200 104" role="img" aria-label="Reparto de los 350 escaños del Congreso elegido en 2023"></svg>
+      </div>
+      <figcaption>
+        <span class="label" id="chamber-title"></span>
+        <ul class="legend-seats" id="chamber-legend"></ul>
+      </figcaption>
+    </figure>
+    <h1>¿De qué partido político <span class="spectrum-text">eres</span>?</h1>
+    <p class="lead"><span id="n-q">36</span> preguntas rápidas de sí o no sobre lo que proponen los partidos. No sabrás de quién es cada propuesta hasta el final.</p>
+    <div class="facts"><span id="f-n">36 preguntas</span><span>unos 4 minutos</span><span id="f-p">11 partidos</span><span>anónimo</span></div>
+    <div class="row" style="justify-content:center">
+      <button class="btn big" id="b-start">Empezar</button>
       <button class="btn ghost" id="b-resume" hidden>Seguir donde lo dejé</button>
     </div>
-    <details class="note">
+    <a class="btn ghost" id="b-share-test" hidden target="_blank" rel="noopener"></a>
+    <p class="parties-line" id="parties-line"></p>
+    <details class="note" style="text-align:left;width:100%">
       <summary>De dónde salen las posturas</summary>
       <div class="body" id="sources-note"></div>
     </details>
   </section>
 
   <!-- Test -->
-  <section id="s-quiz" hidden>
-    <div style="display:grid;gap:14px">
-      <div class="ticks" id="ticks"></div>
-      <div class="qhead">
-        <span class="eyebrow"><b id="q-topic"></b></span>
-        <span class="counter" id="q-count"></span>
+  <section id="s-quiz" class="quiz" hidden>
+    <div class="qtop">
+      <svg class="hemi" id="hemi-quiz" viewBox="0 0 200 104" aria-hidden="true"></svg>
+      <div class="meta">
+        <span class="count" id="q-count"></span>
+        <span class="topic" id="q-topic"></span>
       </div>
-      <article class="card" aria-live="polite">
-        <p class="statement" id="q-text"></p>
-        <p class="context" id="q-context"></p>
-        <div class="answers" role="group" aria-label="Tu postura" id="answers"></div>
-        <div class="qfoot">
-          <label class="imp"><input type="checkbox" id="q-imp"><span class="box">×2</span>Este tema me importa mucho</label>
-          <span class="keys">Teclas 1 a 5 para responder</span>
-        </div>
-      </article>
-      <div class="row" style="justify-content:space-between">
-        <button class="linkbtn" id="b-prev">Anterior</button>
-        <div class="row">
-          <button class="linkbtn" id="b-skip">Saltar esta</button>
-          <button class="linkbtn" id="b-finish">Ver resultado ya</button>
-        </div>
+    </div>
+    <article class="card" id="q-card" aria-live="polite">
+      <p class="question" id="q-text"></p>
+      <p class="context" id="q-context"></p>
+      <div class="answers" role="group" aria-label="Tu respuesta" id="answers"></div>
+      <div class="qfoot">
+        <button class="imp" id="q-imp" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.8z"/></svg>Me importa mucho</button>
+        <span class="keys">Teclas 1 Sí · 2 Depende · 3 No</span>
+      </div>
+    </article>
+    <div class="qnav">
+      <button class="linkbtn" id="b-prev">Anterior</button>
+      <div class="row">
+        <button class="linkbtn" id="b-skip">No lo sé, saltar</button>
+        <button class="linkbtn" id="b-finish">Ver resultado ya</button>
       </div>
     </div>
   </section>
 
   <!-- Resultado -->
-  <section id="s-results" hidden>
-    <div style="display:grid;gap:26px">
-      <div class="res-head">
-        <h2>Tu coincidencia con cada partido</h2>
-        <p class="muted small" id="res-summary"></p>
-        <div class="filter">
-          <label for="region">Voto en</label>
-          <select id="region">
-            <option value="todas">Ver todos los partidos</option>
-            <option value="galicia">Galicia</option>
-            <option value="cataluna">Cataluña</option>
-            <option value="euskadi">País Vasco</option>
-            <option value="navarra">Navarra</option>
-            <option value="otra">Otra comunidad</option>
-          </select>
-        </div>
-      </div>
-      <ol class="ranking" id="ranking"></ol>
-      <div class="row">
-        <button class="btn ghost" id="b-review">Repasar mis respuestas</button>
-        <button class="btn ghost" id="b-reset">Empezar de cero</button>
-      </div>
-      <div class="breakdown">
-        <h2>Quién defiende qué</h2>
-        <p class="muted small">Cada afirmación con tu respuesta (recuadro marcado) y dónde se sitúa cada partido. Abre «Por qué» para ver el motivo y la fuente.</p>
-        <div id="breakdown" class="breakdown"></div>
-      </div>
-      <div class="method" id="method"></div>
+  <section id="s-results" class="results" hidden>
+    <div class="winner" id="winner"></div>
+    <div class="filter">
+      <label for="region">Voto en</label>
+      <select id="region">
+        <option value="todas">Ver todos los partidos</option>
+        <option value="galicia">Galicia</option>
+        <option value="cataluna">Cataluña</option>
+        <option value="euskadi">País Vasco</option>
+        <option value="navarra">Navarra</option>
+        <option value="otra">Otra comunidad</option>
+      </select>
     </div>
+    <div style="display:grid;gap:6px">
+      <h2>Tu coincidencia con cada partido</h2>
+      <p class="muted small" id="res-summary"></p>
+    </div>
+    <ol class="ranking" id="ranking"></ol>
+
+    <div class="share" id="share-box" hidden>
+      <h3>Pásaselo a tus amigos</h3>
+      <p class="small muted">Se envía tu resultado y el enlace al test. Tus respuestas, una a una, no se envían.</p>
+      <div class="row">
+        <a class="btn wa" id="b-wa" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.7.3-.2.3-.9.9-.9 2.2s.9 2.5 1 2.7c.1.2 1.8 2.8 4.4 3.9 1.6.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z"/></svg>Enviar por WhatsApp</a>
+        <button class="btn ghost" id="b-copy">Copiar texto</button>
+      </div>
+      <span class="copied" id="copied" aria-live="polite"></span>
+    </div>
+
+    <div class="row">
+      <button class="btn ghost" id="b-review">Cambiar respuestas</button>
+      <button class="btn ghost" id="b-reset">Empezar de cero</button>
+    </div>
+
+    <div class="breakdown">
+      <h2>Quién defiende qué</h2>
+      <p class="muted small">Tu respuesta va en el recuadro marcado. Borde discontinuo: el partido está a favor o en contra con matices. Abre «Por qué» para ver el motivo y la fuente.</p>
+      <div id="breakdown" class="breakdown"></div>
+    </div>
+    <div class="method" id="method"></div>
   </section>
 
   <footer id="footer"></footer>
@@ -269,28 +318,72 @@ footer { font-size: 13px; color: var(--muted); border-top: 1px solid var(--rule)
 const DATA = /*DATA*/null;
 
 const P = DATA.parties, S = DATA.statements, POS = DATA.positions;
-const LABELS = { "2": "Muy de acuerdo", "1": "De acuerdo", "0": "Neutral", "-1": "En desacuerdo", "-2": "Muy en desacuerdo" };
-const PLABELS = { "2": "Muy a favor", "1": "A favor", "0": "Neutral", "-1": "En contra", "-2": "Muy en contra" };
-const ORDER = [2, 1, 0, -1, -2];
-const KEY = "afinidad29n-v1";
+const ULAB = { "2": "Sí", "0": "Depende", "-2": "No" };
+const PLAB = { "2": "A favor", "1": "A favor con matices", "0": "Ni a favor ni en contra, o ambiguo", "-1": "En contra con matices", "-2": "En contra" };
+const COLS = [{ v: 2, lab: "Sí", sub: "a favor" }, { v: 0, lab: "Depende", sub: "ambiguo" }, { v: -2, lab: "No", sub: "en contra" }];
+const ICON = {
+  "2": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 12.5l5 5 10-11"/></svg>',
+  "0": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M4 10c3-3 5 3 8 0s5-3 8 0M4 15c3-3 5 3 8 0s5-3 8 0"/></svg>',
+  "-2": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>',
+};
+const KEY = "afinidad29n-v2";
+const SEATS = 350;
 
 let state = { screen: "intro", i: 0, answers: {}, region: "todas" };
 const $ = (id) => document.getElementById(id);
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const answered = (a) => a && a.v !== null && a.v !== undefined;
 
 function save() { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} }
-function load() {
-  try { const s = JSON.parse(localStorage.getItem(KEY) || "null"); if (s && s.answers) return s; } catch (e) {}
-  return null;
+function load() { try { const s = JSON.parse(localStorage.getItem(KEY) || "null"); if (s && s.answers) return s; } catch (e) {} return null; }
+
+/* ---------- Hemiciclo de 350 escaños, de izquierda a derecha, coloreado con todo el arcoíris ---------- */
+const STOPS = [[223, 90, 53], [237, 162, 27], [42, 165, 138], [63, 111, 224], [141, 91, 214]];
+function spectrum(t) {
+  const x = Math.min(Math.max(t, 0), 1) * (STOPS.length - 1), k = Math.min(Math.floor(x), STOPS.length - 2), f = x - k;
+  const c = STOPS[k].map((v, j) => Math.round(v + (STOPS[k + 1][j] - v) * f));
+  return `rgb(${c[0]},${c[1]},${c[2]})`;
+}
+function seatLayout() {
+  const rows = 10, r0 = 0.4, r1 = 1, R = 96, cx = 100, cy = 100;
+  const radii = Array.from({ length: rows }, (_, i) => r0 + ((r1 - r0) * i) / (rows - 1));
+  const sum = radii.reduce((a, b) => a + b, 0);
+  const counts = radii.map((r) => Math.round((SEATS * r) / sum));
+  counts[rows - 1] += SEATS - counts.reduce((a, b) => a + b, 0);
+  const seats = [];
+  radii.forEach((r, i) => {
+    for (let j = 0; j < counts[i]; j++) {
+      const a = Math.PI * (1 - j / (counts[i] - 1));
+      seats.push({ a, x: cx + R * r * Math.cos(a), y: cy - R * r * Math.sin(a) });
+    }
+  });
+  return seats.sort((p, q) => q.a - p.a);
+}
+const LAYOUT = seatLayout();
+function seatColors(blocks) {
+  const out = [];
+  for (const b of blocks) for (let k = 0; k < b.seats; k++) out.push(b.color);
+  return out;
+}
+function drawHemi(svg, stagger, blocks) {
+  const cols = blocks ? seatColors(blocks) : null;
+  svg.innerHTML = LAYOUT.map((s, k) =>
+    `<circle cx="${s.x.toFixed(2)}" cy="${s.y.toFixed(2)}" r="2.45" fill="${cols ? cols[k] : spectrum(1 - s.a / Math.PI)}"${stagger ? ` style="animation-delay:${k * 2}ms"` : ""}></circle>`).join("");
+}
+function fillHemi(svg, frac) {
+  const lit = Math.round(SEATS * frac);
+  svg.querySelectorAll("circle").forEach((c, k) => c.classList.toggle("off", k >= lit));
 }
 
-/* Coincidencia: misma postura = 100 %, cada punto de distancia en la escala de 5 resta 25 %.
-   Los temas marcados como importantes pesan el doble. Sin postura conocida del partido, esa afirmación no cuenta para él. */
+/* ---------- Puntuación ----------
+   Sí = +2, Depende = 0, No = -2, en la misma escala de cinco puntos que las posturas de los partidos.
+   Misma postura = 100 %, cada punto de distancia resta 25 %. «Me importa mucho» pesa el doble.
+   Si no consta la postura del partido, esa pregunta no cuenta para él. */
 function score(pid) {
   let num = 0, den = 0, n = 0;
   for (const s of S) {
     const a = state.answers[s.id];
-    if (!a || a.v === null || a.v === undefined) continue;
+    if (!answered(a)) continue;
     const p = POS[s.id] && POS[s.id][pid];
     if (!p || p.pos === null || p.pos === undefined) continue;
     const w = a.imp ? 2 : 1;
@@ -299,58 +392,75 @@ function score(pid) {
   }
   return { pct: den ? Math.round((100 * num) / den) : null, n };
 }
-function answeredCount() { return S.filter((s) => state.answers[s.id] && state.answers[s.id].v !== null && state.answers[s.id].v !== undefined).length; }
+/* Un partido solo compite por el primer puesto si se le ha podido comparar en al menos el 60 % de tus respuestas. */
+function ranking() {
+  const n = nAnswered(), min = Math.max(3, Math.ceil(n * 0.6));
+  return visibleParties().map((p) => { const r = { p, ...score(p.id) }; r.ok = r.pct !== null && r.n >= min; return r; })
+    .sort((a, b) => (b.ok - a.ok) || ((b.pct ?? -1) - (a.pct ?? -1)));
+}
+const nAnswered = () => S.filter((s) => answered(state.answers[s.id])).length;
+const nTouched = () => S.filter((s) => state.answers[s.id]).length;
 
 function show(screen) {
   state.screen = screen;
   for (const id of ["intro", "quiz", "results"]) $("s-" + id).hidden = id !== screen;
-  if (screen === "quiz") renderQuiz();
+  if (screen === "quiz") renderQuiz(false);
   if (screen === "results") renderResults();
   save();
   window.scrollTo({ top: 0 });
 }
 
+/* ---------- Compartir ---------- */
+function waLink(text) { return "https://wa.me/?text=" + encodeURIComponent(text); }
+function testInvite() { return `Mira este test: ${S.length} preguntas rápidas de sí o no y te dice de qué partido político eres de cara a las generales del 29-N. Las propuestas salen sin nombre hasta el final. ${DATA.shareUrl}`; }
+function resultText(rows) {
+  const top = rows.filter((r) => r.ok).slice(0, 3).map((r, k) => `${k + 1}. ${r.p.short}: ${r.pct} %`).join("\n");
+  return `Mi resultado en el test «¿De qué partido político eres?» (generales del 29-N):\n${top}\n\nHaz el tuyo (${S.length} preguntas de sí o no, unos 4 minutos): ${DATA.shareUrl}`;
+}
+
 /* ---------- Portada ---------- */
 function renderIntro() {
-  $("n-st").textContent = S.length;
-  $("f-n").textContent = S.length + " afirmaciones";
-  $("parties-line").textContent = "Partidos comparados: " + P.map((p) => p.short).join(", ") + ".";
-  $("sources-note").innerHTML = DATA.notes.map((t) => "<p>" + t + "</p>").join("");
-  $("b-resume").hidden = !(Object.keys(state.answers).length > 0);
-  $("footer").innerHTML = DATA.footer;
+  $("n-q").textContent = S.length;
+  $("f-n").textContent = S.length + " preguntas";
+  $("f-p").textContent = P.length + " partidos";
+  $("parties-line").textContent = "Partidos: " + P.map((p) => p.short).join(", ") + ".";
+  $("sources-note").innerHTML = DATA.notes.map((t) => "<p>" + esc(t) + "</p>").join("");
+  $("b-resume").hidden = nTouched() === 0;
+  $("footer").textContent = DATA.footer;
+  $("chamber-title").textContent = DATA.chamber.title;
+  $("chamber-legend").innerHTML = DATA.chamber.blocks.map((b) =>
+    `<li><i style="background:${b.color}"></i>${esc(b.short)} <b>${b.seats}</b></li>`).join("");
+  const sh = $("b-share-test");
+  sh.hidden = !DATA.shareUrl;
+  if (DATA.shareUrl) { sh.href = waLink(testInvite()); sh.textContent = "Pasar el test por WhatsApp"; }
 }
 
 /* ---------- Test ---------- */
-function renderTicks() {
-  const t = $("ticks"); t.style.setProperty("--n", S.length);
-  t.innerHTML = S.map((s, k) => {
-    const a = state.answers[s.id];
-    const cls = ["tick", a ? (a.v === null ? "skip" : "done") : "", k === state.i ? "now" : ""].join(" ");
-    return `<button class="${cls}" data-k="${k}" aria-label="Afirmación ${k + 1}"></button>`;
-  }).join("");
-}
-function renderQuiz() {
+function renderQuiz(animate) {
   const s = S[state.i], a = state.answers[s.id];
-  renderTicks();
+  fillHemi($("hemi-quiz"), nTouched() / S.length);
+  $("q-count").innerHTML = `${state.i + 1}<small> / ${S.length}</small>`;
   $("q-topic").textContent = s.topic;
-  $("q-count").textContent = (state.i + 1) + " de " + S.length;
   $("q-text").textContent = s.text;
   $("q-context").textContent = s.context || "";
   $("q-context").hidden = !s.context;
-  $("answers").innerHTML = ORDER.map((v, k) =>
-    `<button class="ans" data-v="${v}" aria-pressed="${a && a.v === v}"><span class="dot" aria-hidden="true"></span>${LABELS[v]}</button>`).join("");
-  $("q-imp").checked = !!(a && a.imp);
+  $("answers").innerHTML = COLS.map((c) =>
+    `<button class="ans" data-v="${c.v}" aria-pressed="${!!a && a.v === c.v}">${ICON[c.v]}${c.lab}</button>`).join("");
+  $("q-imp").setAttribute("aria-pressed", String(!!(a && a.imp)));
   $("b-prev").disabled = state.i === 0;
+  if (animate) { const c = $("q-card"); c.classList.remove("enter"); void c.offsetWidth; c.classList.add("enter"); }
 }
+let pendingImp = false;
 function answer(v) {
-  const s = S[state.i];
-  state.answers[s.id] = { v, imp: $("q-imp").checked };
+  const s = S[state.i], prev = state.answers[s.id];
+  state.answers[s.id] = { v, imp: prev ? !!prev.imp : pendingImp };
+  pendingImp = false;
   save();
-  renderQuiz();
-  setTimeout(next, 170);
+  renderQuiz(false);
+  setTimeout(next, 200);
 }
 function next() {
-  if (state.i < S.length - 1) { state.i++; renderQuiz(); save(); }
+  if (state.i < S.length - 1) { state.i++; renderQuiz(true); save(); }
   else show("results");
 }
 
@@ -362,86 +472,110 @@ function visibleParties() {
 }
 function renderResults() {
   $("region").value = state.region;
-  const n = answeredCount();
-  const imp = S.filter((s) => state.answers[s.id] && state.answers[s.id].imp && state.answers[s.id].v !== null).length;
+  const n = nAnswered();
+  const imp = S.filter((s) => answered(state.answers[s.id]) && state.answers[s.id].imp).length;
   $("res-summary").textContent = n === 0
-    ? "Aún no has respondido ninguna afirmación."
-    : `Calculado con ${n} de ${S.length} respuestas` + (imp ? `, ${imp} marcadas como importantes (cuentan doble).` : ".") + (n < 10 ? " Con tan pocas respuestas el resultado es poco fiable." : "");
+    ? "Aún no has respondido ninguna pregunta."
+    : `Calculado con ${n} de ${S.length} respuestas` + (imp ? `; ${imp} marcadas como importantes cuentan doble.` : ".") + (n < 10 ? " Con tan pocas respuestas el resultado es poco fiable." : "");
 
-  const rows = visibleParties().map((p) => ({ p, ...score(p.id) }))
-    .sort((a, b) => (b.pct ?? -1) - (a.pct ?? -1));
+  const rows = ranking();
+  const best = rows[0], second = rows[1];
+  $("winner").innerHTML = n === 0 || !best || !best.ok
+    ? `<span class="label">Tu resultado</span><span class="who">Responde alguna pregunta</span>`
+    : `<span class="label">Por lo que has respondido, eres más de</span>
+       <span class="who">${esc(best.p.short)}</span>
+       <span class="pct">${best.pct}%</span>
+       <span class="sub">${second && second.ok ? `Le sigue ${esc(second.p.short)} con un ${second.pct} %. ` : ""}Es tu grado de coincidencia con sus posturas en estas ${S.length} preguntas, no una recomendación de voto.</span>`;
+
   $("ranking").innerHTML = rows.map((r, k) => {
-    const low = n > 0 && r.n < n * 0.6;
-    return `<li class="rank">
+    const low = n > 0 && !r.ok;
+    return `<li class="rank${low ? " low" : ""}">
       <span class="pos">${k + 1}</span>
       <span class="name"><strong>${esc(r.p.short)}</strong>${r.p.name ? `<span class="full">${esc(r.p.name)}</span>` : ""}${r.p.where === "all" ? "" : `<span class="scope">${esc(r.p.scope)}</span>`}</span>
       <span class="pct">${r.pct === null ? "–" : r.pct + "%"}</span>
       <span class="bar"><i data-w="${r.pct ?? 0}"></i></span>
-      <span class="meta">${r.pct === null ? "Sin datos para comparar." : `Comparado en ${r.n} de tus ${n} respuestas.`}${low ? ` <span class="warn">De este partido falta postura en varios temas: el porcentaje es menos fiable.</span>` : ""}</span>
+      <span class="meta">${r.pct === null ? "Sin datos para comparar." : `Comparado en ${r.n} de tus ${n} respuestas.`}${low && r.pct !== null ? ` <span class="warn">Datos insuficientes: de este partido no consta postura en muchos temas, así que va al final de la lista.</span>` : ""}</span>
     </li>`;
   }).join("");
-  requestAnimationFrame(() => document.querySelectorAll(".rank .bar i").forEach((i) => (i.style.width = i.dataset.w + "%")));
+  requestAnimationFrame(() => requestAnimationFrame(() =>
+    document.querySelectorAll(".rank .bar i").forEach((i) => (i.style.width = i.dataset.w + "%"))));
+
+  const shareOk = !!DATA.shareUrl && n > 0;
+  $("share-box").hidden = !shareOk;
+  if (shareOk) { $("b-wa").href = waLink(resultText(rows)); $("copied").textContent = ""; }
 
   const vis = visibleParties();
-  let html = "", lastTopic = "";
+  let html = "", last = "";
   for (const s of S) {
-    if (s.topic !== lastTopic) { html += `<div class="topic-head">${esc(s.topic)}</div>`; lastTopic = s.topic; }
-    const a = state.answers[s.id];
-    const mine = a && a.v !== null && a.v !== undefined ? a.v : null;
-    const cols = ORDER.map((v) => {
-      const here = vis.filter((p) => POS[s.id][p.id] && POS[s.id][p.id].pos === v);
-      return `<div class="col${mine === v ? " mine" : ""}"><span class="lab">${mine === v ? "Tú · " : ""}${PLABELS[v]}</span><span class="chips">${here.map((p) => `<span class="chip">${esc(p.short)}</span>`).join("")}</span></div>`;
+    if (s.topic !== last) { html += `<h3 class="topic-head">${esc(s.topic)}</h3>`; last = s.topic; }
+    const a = state.answers[s.id], mine = answered(a) ? a.v : null;
+    const cols = COLS.map((c) => {
+      const here = vis.filter((p) => { const x = POS[s.id][p.id]; return x && x.pos !== null && Math.sign(x.pos) === Math.sign(c.v); });
+      return `<div class="col${mine === c.v ? " mine" : ""}"><span class="lab">${c.lab}<small>${mine === c.v ? "tú y…" : c.sub}</small></span><span class="chips">${here.map((p) => `<span class="chip${Math.abs(POS[s.id][p.id].pos) === 1 ? " soft" : ""}">${esc(p.short)}</span>`).join("")}</span></div>`;
     }).join("");
     const none = vis.filter((p) => !POS[s.id][p.id] || POS[s.id][p.id].pos === null);
     const why = vis.map((p) => {
       const c = POS[s.id][p.id] || {};
-      const src = c.src ? ` <a href="${esc(c.src)}" target="_blank" rel="noopener">fuente</a>` : "";
-      const pos = c.pos === null || c.pos === undefined ? "Sin postura conocida" : PLABELS[c.pos];
-      return `<li><b>${esc(p.short)}</b><span>${esc(pos)}. ${esc(c.why || "")}${src}${c.conf ? ` <span class="conf">fiabilidad ${esc(c.conf)}</span>` : ""}</span></li>`;
+      const src = c.src ? ` <a href="${esc(c.src)}" target="_blank" rel="noopener">Fuente</a>` : "";
+      const pos = c.pos === null || c.pos === undefined ? "Sin postura conocida" : PLAB[c.pos];
+      return `<li><b>${esc(p.short)}</b><span><b>${esc(pos)}.</b> ${esc(c.why || "")}${src}${c.conf ? ` <span class="conf">fiabilidad ${esc(c.conf)}</span>` : ""}</span></li>`;
     }).join("");
     html += `<div class="stmt">
-      <p class="t">${esc(s.text)}</p>
-      <p class="you">Tu respuesta: <b>${mine === null ? (a ? "la saltaste" : "sin responder") : LABELS[mine]}</b>${a && a.imp ? " · importante" : ""}</p>
-      <div class="strip-scroll"><div class="strip">${cols}</div></div>
+      <p class="q">${esc(s.text)}</p>
+      <p class="you">Tu respuesta: <b>${mine === null ? (a ? "la saltaste" : "sin responder") : ULAB[mine]}</b>${a && a.imp ? " · te importa mucho" : ""}</p>
+      <div class="strip">${cols}</div>
       ${none.length ? `<p class="nodata">Sin postura conocida: ${none.map((p) => esc(p.short)).join(", ")}</p>` : ""}
       <details><summary>Por qué</summary><ul class="why">${why}</ul></details>
     </div>`;
   }
   $("breakdown").innerHTML = html;
-  $("method").innerHTML = `<h3>Cómo se calcula</h3>` + DATA.method.map((t) => `<p>${t}</p>`).join("") + `<h3>Límites</h3>` + DATA.notes.map((t) => `<p>${t}</p>`).join("");
+  $("method").innerHTML = `<h3>Cómo se calcula</h3>` + DATA.method.map((t) => `<p>${esc(t)}</p>`).join("") +
+    `<h3>Límites</h3>` + DATA.notes.map((t) => `<p>${esc(t)}</p>`).join("");
 }
 
 /* ---------- Eventos ---------- */
 $("b-start").addEventListener("click", () => { state.i = 0; show("quiz"); });
 $("b-resume").addEventListener("click", () => {
-  const firstOpen = S.findIndex((s) => !state.answers[s.id]);
-  state.i = firstOpen === -1 ? 0 : firstOpen;
-  show(firstOpen === -1 ? "results" : "quiz");
+  const open = S.findIndex((s) => !state.answers[s.id]);
+  state.i = open === -1 ? 0 : open;
+  show(open === -1 ? "results" : "quiz");
 });
 $("answers").addEventListener("click", (e) => { const b = e.target.closest(".ans"); if (b) answer(Number(b.dataset.v)); });
-$("ticks").addEventListener("click", (e) => { const b = e.target.closest(".tick"); if (b) { state.i = Number(b.dataset.k); renderQuiz(); save(); } });
-$("q-imp").addEventListener("change", () => {
-  const s = S[state.i];
-  if (state.answers[s.id]) { state.answers[s.id].imp = $("q-imp").checked; save(); }
+$("q-imp").addEventListener("click", () => {
+  const s = S[state.i], a = state.answers[s.id];
+  const on = $("q-imp").getAttribute("aria-pressed") !== "true";
+  $("q-imp").setAttribute("aria-pressed", String(on));
+  if (a) { a.imp = on; save(); } else pendingImp = on;
 });
-$("b-prev").addEventListener("click", () => { if (state.i > 0) { state.i--; renderQuiz(); save(); } });
-$("b-skip").addEventListener("click", () => { state.answers[S[state.i].id] = { v: null, imp: false }; save(); next(); });
+$("b-prev").addEventListener("click", () => { if (state.i > 0) { state.i--; pendingImp = false; renderQuiz(true); save(); } });
+$("b-skip").addEventListener("click", () => { state.answers[S[state.i].id] = { v: null, imp: false }; pendingImp = false; save(); next(); });
 $("b-finish").addEventListener("click", () => show("results"));
 $("b-review").addEventListener("click", () => { state.i = 0; show("quiz"); });
 $("b-reset").addEventListener("click", () => { state.answers = {}; state.i = 0; save(); renderIntro(); show("intro"); });
 $("region").addEventListener("change", (e) => { state.region = e.target.value; save(); renderResults(); });
+$("b-copy").addEventListener("click", () => {
+  const text = resultText(ranking());
+  const done = () => ($("copied").textContent = "Copiado. Pégalo donde quieras.");
+  const fail = () => {
+    const ta = document.createElement("textarea"); ta.value = text; ta.style.width = "100%"; ta.rows = 6;
+    $("copied").textContent = "Selecciona y copia este texto:"; $("copied").after(ta); ta.select();
+  };
+  try { navigator.clipboard.writeText(text).then(done, fail); } catch (e) { fail(); }
+});
 document.addEventListener("keydown", (e) => {
   if (state.screen !== "quiz" || e.target.tagName === "SELECT" || e.metaKey || e.ctrlKey || e.altKey) return;
-  const k = { "1": 2, "2": 1, "3": 0, "4": -1, "5": -2 }[e.key];
-  if (k !== undefined) { e.preventDefault(); answer(k); }
-  else if (e.key === "ArrowLeft" && state.i > 0) { state.i--; renderQuiz(); save(); }
-  else if (e.key === "ArrowRight") { next(); }
+  const v = { "1": 2, "2": 0, "3": -2 }[e.key];
+  if (v !== undefined) { e.preventDefault(); answer(v); }
+  else if (e.key === "ArrowLeft" && state.i > 0) { state.i--; renderQuiz(true); save(); }
+  else if (e.key === "ArrowRight") next();
 });
 
 function start(snap) {
   const saved = snap && snap.answers ? snap : load();
   if (saved) state = { ...state, ...saved };
-  if (state.i >= S.length) state.i = 0;
+  if (!(state.i >= 0 && state.i < S.length)) state.i = 0;
+  drawHemi($("hemi-intro"), true, DATA.chamber.blocks);
+  drawHemi($("hemi-quiz"), false);
   renderIntro();
   show(state.screen || "intro");
 }

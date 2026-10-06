@@ -1,0 +1,554 @@
+{
+ "e1": {
+  "nota_redaccion": "Junta dos ideas: varios partidos (PP, Junts) piden bajar impuestos pero hablan de recortar solo gasto 'superfluo', no servicios. Propuesta: 'Hay que bajar los impuestos en general aunque eso obligue a gastar menos en servicios públicos.'",
+  "pp": {
+   "pos": 2,
+   "why": "Feijóo promete bajar IRPF e IVA en su primer año y recortar gasto superfluo en cargos y publicidad institucional.",
+   "src": "https://lavozdeibiza.com/actualidad/feijoo-se-compromete-a-bajar-impuestos-y-en-caso-de-incumplir-dimitira/",
+   "conf": "alta"
+  },
+  "psoe": {
+   "pos": -2,
+   "why": "Votó en contra de la moción de Junts para una bajada generalizada de impuestos aprobada en junio de 2025.",
+   "src": "https://theobjective.com/espana/politica/2025-06-26/pp-vox-junts-bajada-impuestos/",
+   "conf": "alta"
+  },
+  "vox": {
+   "pos": 2,
+   "why": "Su programa de 2023 propone una reducción masiva de impuestos y eliminar el gasto que considera ideológico o innecesario.",
+   "src": "https://www.infobae.com/espana/2023/07/07/eliminar-chiringuitos-reducir-masivamente-los-impuestos-y-que-espana-recupere-el-sentido-comun-este-es-el-programa-de-vox/",
+   "conf": "alta"
+  },
+  "fa": {
+   "pos": -2,
+   "why": "Votó contra la bajada generalizada de impuestos de Junts en 2025 y propone subir la tributación de rentas altas y patrimonios.",
+   "src": "https://theobjective.com/espana/politica/2025-06-26/pp-vox-junts-bajada-impuestos/",
+   "conf": "alta"
+  },
+  "podemos": {
+   "pos": -2,
+   "why": "Votó en contra de la moción de Junts para una bajada generalizada de impuestos en junio de 2025.",
+   "src": "https://theobjective.com/espana/politica/2025-06-26/pp-vox-junts-bajada-impuestos/",
+   "conf": "alta"
+  },
+  "salf": {
+   "pos": 2,
+   "why": "En Andalucía (2026) propuso IRPF autonómico al 0% hasta 35.000 euros y recortar altos cargos, subvenciones y publicidad institucional.",
+   "src": "https://theobjective.com/espana/politica/2026-05-01/alvise-canal-sur-juanma-moreno/",
+   "conf": "media"
+  },
+  "bng": {
+   "pos": -2,
+   "why": "Votó en contra de la moción de Junts para una bajada generalizada de impuestos en junio de 2025.",
+   "src": "https://theobjective.com/espana/politica/2025-06-26/pp-vox-junts-bajada-impuestos/",
+   "conf": "alta"
+  },
+  "erc": {
+   "pos": -2,
+   "why": "Votó en contra de la moción de Junts para una bajada generalizada de impuestos en junio de 2025.",
+   "src": "https://theobjective.com/espana/politica/2025-06-26/pp-vox-junts-bajada-impuestos/",
+   "conf": "alta"
+  },
+  "bildu": {
+   "pos": -2,
+   "why": "Votó en contra de la moción de Junts para una bajada generalizada de impuestos en junio de 2025.",
+   "src": "https://theobjective.com/espana/politica/2025-06-26/pp-vox-junts-bajada-impuestos/",
+   "conf": "alta"
+  },
+  "junts": {
+   "pos": 1,
+   "why": "Promovió en 2025 una moción, aprobada, para bajar impuestos de forma generalizada, sin plantear expresamente recortes de gasto.",
+   "src": "https://theobjective.com/espana/politica/2025-06-26/pp-vox-junts-bajada-impuestos/",
+   "conf": "alta"
+  },
+  "pnv": {
+   "pos": 0,
+   "why": "Se abstuvo en la moción de Junts para una bajada generalizada de impuestos de junio de 2025.",
+   "src": "https://theobjective.com/espana/politica/2025-06-26/pp-vox-junts-bajada-impuestos/",
+   "conf": "media"
+  }
+ },
+ "e2": {
+  "nota_redaccion": "Puede confundirse con el Impuesto de Patrimonio autonómico. Propuesta: 'Debe mantenerse el impuesto estatal a las grandes fortunas (patrimonios de más de 3 millones de euros).'",
+  "pp": {
+   "pos": -2,
+   "why": "Feijóo prometió eliminar Patrimonio y el impuesto a las grandes fortunas; sus comunidades lo recurrieron ante el Constitucional.",
+   "src": "https://www.eldiario.es/1_a37426",
+   "conf": "alta"
+  },
+  "psoe": {
+   "pos": 2,
+   "why": "Su Gobierno creó el impuesto en 2022 y lo prorrogó de forma indefinida con el Real Decreto-ley 8/2023.",
+   "src": "https://www.garrigues.com/es_ES/noticia/esta-es-situacion-actual-impuesto-grandes-fortunas",
+   "conf": "alta"
+  },
+  "vox": {
+   "pos": -2,
+   "why": "Su programa de 2023 propone eliminar el Impuesto de Patrimonio y votó en contra de crear el de grandes fortunas en 2022.",
+   "src": "https://www.infobae.com/espana/2023/07/07/eliminar-chiringuitos-reducir-masivamente-los-impuestos-y-que-espana-recupere-el-sentido-comun-este-es-el-programa-de-vox/",
+   "conf": "alta"
+  },
+  "fa": {
+   "pos": 2,
+   "why": "Sumar propone mantenerlo y ampliarlo a patrimonios de más de un millón de euros, frente a los tres millones actuales.",
+   "src": "https://www.eldebate.com/economia/20240916/yolanda-diaz-pretende-implantar-impuesto-solidaridad-herencias-partir-millon-euros_227766.html",
+   "conf": "alta"
+  },
+  "podemos": {
+   "pos": 2,
+   "why": "Como parte de Unidas Podemos votó a favor de crear el impuesto a las grandes fortunas en 2022.",
+   "src": "https://forbes.es/?p=199607",
+   "conf": "alta"
+  },
+  "salf": {
+   "pos": null,
+   "why": "No consta postura verificable sobre el impuesto estatal a las grandes fortunas.",
+   "src": null,
+   "conf": "baja"
+  },
+  "bng": {
+   "pos": 2,
+   "why": "Votó a favor de crear el impuesto a las grandes fortunas en 2022, dentro de la Ley 38/2022.",
+   "src": "https://forbes.es/?p=199607",
+   "conf": "alta"
+  },
+  "erc": {
+   "pos": 2,
+   "why": "Votó a favor de crear el impuesto a las grandes fortunas en 2022, dentro de la Ley 38/2022.",
+   "src": "https://forbes.es/?p=199607",
+   "conf": "alta"
+  },
+  "bildu": {
+   "pos": 2,
+   "why": "Votó a favor de crear el impuesto a las grandes fortunas en 2022, dentro de la Ley 38/2022.",
+   "src": "https://forbes.es/?p=199607",
+   "conf": "alta"
+  },
+  "junts": {
+   "pos": -1,
+   "why": "Votó a favor de crearlo en 2022, pero ahora propone en el Congreso suprimir el Impuesto de Patrimonio y bajar la fiscalidad.",
+   "src": "https://es.ara.cat/politica/junts-pp-declaran-guerra-infierno-fiscal-salvador-illa-pedro-sanchez_1_5707779.html",
+   "conf": "media"
+  },
+  "pnv": {
+   "pos": 0,
+   "why": "Se abstuvo al crear el impuesto en 2022; Euskadi aplica su propio régimen fiscal foral.",
+   "src": "https://forbes.es/?p=199607",
+   "conf": "media"
+  }
+ },
+ "e3": {
+  "nota_redaccion": "Mezcla banca y energéticas, y Junts y PNV votaron distinto en cada caso (sí a la banca en 2024, no a energéticas en 2025). Además, el de banca ya es permanente y grava el margen, no beneficios extraordinarios. Propuesta: separar en dos afirmaciones o decir 'Debe haber un impuesto especial permanente a bancos y grandes energéticas.'",
+  "pp": {
+   "pos": -2,
+   "why": "Votó contra los gravámenes de 2022, contra el impuesto a la banca de 2024 y contra prorrogar el de energéticas en 2025.",
+   "src": "https://www.bolsamania.com/noticias/politica/congreso-rechaza-decreto-gravamen-empresas-energeticas--18614236.html",
+   "conf": "alta"
+  },
+  "psoe": {
+   "pos": 2,
+   "why": "Creó ambos gravámenes, aprobó en 2024 el nuevo impuesto a la banca y defendió prorrogar el de energéticas, que cayó en 2025.",
+   "src": "https://www.menorca.info/actualidad/nacional/2024/11/21/2279661/impuestos-espana-congreso-aprueba-paquete-fiscal-impuestos-banca-tabaco.html",
+   "conf": "alta"
+  },
+  "vox": {
+   "pos": -2,
+   "why": "Votó contra el impuesto a la banca de 2024 y contra prorrogar el de energéticas en enero de 2025.",
+   "src": "https://www.bolsamania.com/noticias/politica/congreso-rechaza-decreto-gravamen-empresas-energeticas--18614236.html",
+   "conf": "alta"
+  },
+  "fa": {
+   "pos": 2,
+   "why": "Votó a favor del impuesto a la banca en 2024 y pide hacer permanentes los gravámenes a banca y energéticas.",
+   "src": "https://www.menorca.info/actualidad/nacional/2024/11/21/2279661/impuestos-espana-congreso-aprueba-paquete-fiscal-impuestos-banca-tabaco.html",
+   "conf": "alta"
+  },
+  "podemos": {
+   "pos": 2,
+   "why": "Exigió hacer permanente el impuesto a las energéticas y condicionó su voto a la reforma fiscal de 2024 a prorrogarlo.",
+   "src": "https://www.energias-renovables.com/panorama/la-derecha-catalana-pp-y-vox-fulminan-20241114",
+   "conf": "alta"
+  },
+  "salf": {
+   "pos": null,
+   "why": "No consta postura pública sobre impuestos extra a bancos o energéticas.",
+   "src": null,
+   "conf": "baja"
+  },
+  "bng": {
+   "pos": 2,
+   "why": "Votó el impuesto a la banca de 2024 tras pactar con el Gobierno prorrogar también el de energéticas.",
+   "src": "https://eldiario.es/economia/congreso-aprueba-reforma-fiscal-impuesto-banca-compromiso-prorrogar-energeticas_1_11839252.html",
+   "conf": "alta"
+  },
+  "erc": {
+   "pos": 2,
+   "why": "Defendió hacer permanente el impuesto a las energéticas y votó el impuesto a la banca de 2024.",
+   "src": "https://www.energias-renovables.com/panorama/la-derecha-catalana-pp-y-vox-fulminan-20241114",
+   "conf": "alta"
+  },
+  "bildu": {
+   "pos": 2,
+   "why": "Defendió hacer permanente el impuesto a las energéticas y votó el impuesto a la banca de 2024.",
+   "src": "https://www.energias-renovables.com/panorama/la-derecha-catalana-pp-y-vox-fulminan-20241114",
+   "conf": "alta"
+  },
+  "junts": {
+   "pos": -1,
+   "why": "Votó el impuesto a la banca de 2024, pero en enero de 2025 tumbó con PP, Vox y PNV la prórroga del de energéticas.",
+   "src": "https://www.bolsamania.com/noticias/politica/congreso-rechaza-decreto-gravamen-empresas-energeticas--18614236.html",
+   "conf": "alta"
+  },
+  "pnv": {
+   "pos": -1,
+   "why": "Votó el impuesto a la banca de 2024, pero en enero de 2025 tumbó con PP, Vox y Junts la prórroga del de energéticas.",
+   "src": "https://www.bolsamania.com/noticias/politica/congreso-rechaza-decreto-gravamen-empresas-energeticas--18614236.html",
+   "conf": "alta"
+  }
+ },
+ "e4": {
+  "nota_redaccion": "PP y Junts no piden 'suprimir' sino bonificar al 99% entre familiares directos. Propuesta: 'Las herencias entre padres, hijos y cónyuges no deberían pagar impuesto de sucesiones en ninguna parte de España.'",
+  "pp": {
+   "pos": 1,
+   "why": "Feijóo se compromete a bonificar el impuesto en toda España; sus comunidades lo bonifican al 99% entre familiares directos.",
+   "src": "https://lavozdeibiza.com/actualidad/feijoo-se-compromete-a-bajar-impuestos-y-en-caso-de-incumplir-dimitira/",
+   "conf": "alta"
+  },
+  "psoe": {
+   "pos": -2,
+   "why": "Votó en contra de la moción de Junts de 2025 que pedía bonificar al 99% sucesiones entre familiares directos.",
+   "src": "https://theobjective.com/espana/politica/2025-06-26/pp-vox-junts-bajada-impuestos/",
+   "conf": "media"
+  },
+  "vox": {
+   "pos": 2,
+   "why": "Su programa de 2023 propone eliminar el Impuesto de Sucesiones y Donaciones en toda España.",
+   "src": "https://www.infobae.com/espana/2023/07/07/eliminar-chiringuitos-reducir-masivamente-los-impuestos-y-que-espana-recupere-el-sentido-comun-este-es-el-programa-de-vox/",
+   "conf": "alta"
+  },
+  "fa": {
+   "pos": -2,
+   "why": "Sumar propone un impuesto de solidaridad a herencias de más de un millón y votó contra bonificar sucesiones en 2025.",
+   "src": "https://www.eldebate.com/economia/20240916/yolanda-diaz-pretende-implantar-impuesto-solidaridad-herencias-partir-millon-euros_227766.html",
+   "conf": "alta"
+  },
+  "podemos": {
+   "pos": -2,
+   "why": "Votó en contra de la moción de Junts de 2025 que pedía bonificar al 99% sucesiones entre familiares directos.",
+   "src": "https://theobjective.com/espana/politica/2025-06-26/pp-vox-junts-bajada-impuestos/",
+   "conf": "media"
+  },
+  "salf": {
+   "pos": 2,
+   "why": "En su programa andaluz de 2026 prometió eliminar por completo el impuesto de sucesiones y donaciones.",
+   "src": "https://theobjective.com/espana/politica/2026-05-01/alvise-canal-sur-juanma-moreno/",
+   "conf": "media"
+  },
+  "bng": {
+   "pos": -2,
+   "why": "Votó en contra de la moción de Junts de 2025 que pedía bonificar al 99% sucesiones entre familiares directos.",
+   "src": "https://theobjective.com/espana/politica/2025-06-26/pp-vox-junts-bajada-impuestos/",
+   "conf": "media"
+  },
+  "erc": {
+   "pos": -2,
+   "why": "Votó en contra de la moción de Junts de 2025 que pedía bonificar al 99% sucesiones entre familiares directos.",
+   "src": "https://theobjective.com/espana/politica/2025-06-26/pp-vox-junts-bajada-impuestos/",
+   "conf": "media"
+  },
+  "bildu": {
+   "pos": -2,
+   "why": "Votó en contra de la moción de Junts de 2025 que pedía bonificar al 99% sucesiones entre familiares directos.",
+   "src": "https://theobjective.com/espana/politica/2025-06-26/pp-vox-junts-bajada-impuestos/",
+   "conf": "media"
+  },
+  "junts": {
+   "pos": 1,
+   "why": "Pide bonificar al 99% sucesiones para cónyuges, hijos y padres, no suprimirlo; su moción se aprobó en junio de 2025.",
+   "src": "https://theobjective.com/espana/politica/2025-06-26/pp-vox-junts-bajada-impuestos/",
+   "conf": "alta"
+  },
+  "pnv": {
+   "pos": 0,
+   "why": "Se abstuvo en la moción de Junts de 2025 que pedía bonificar al 99% el impuesto de sucesiones.",
+   "src": "https://theobjective.com/espana/politica/2025-06-26/pp-vox-junts-bajada-impuestos/",
+   "conf": "media"
+  }
+ },
+ "t1": {
+  "nota_redaccion": null,
+  "pp": {
+   "pos": -2,
+   "why": "Su enmienda a la totalidad tumbó la ley de 37,5 horas en septiembre de 2025; la calificó de cargada de ideología.",
+   "src": "https://www.diaridetarragona.com/espana/239614/propuesta-gobierno-reducir-jornada-laboral-37-5-horas-descarrila-congreso.html",
+   "conf": "alta"
+  },
+  "psoe": {
+   "pos": 2,
+   "why": "Su Gobierno aprobó el proyecto de ley de 37,5 horas en 2025 y votó contra las enmiendas que lo tumbaron.",
+   "src": "https://www.periodicodeibiza.es/noticias/nacional/2025/09/11/2467647/congreso-tumba-reduccion-jornada-laboral-prosperar-veto-vox-junts.html",
+   "conf": "alta"
+  },
+  "vox": {
+   "pos": -2,
+   "why": "Presentó enmienda a la totalidad y votó para tumbar la ley de 37,5 horas en septiembre de 2025.",
+   "src": "https://www.periodicodeibiza.es/noticias/nacional/2025/09/11/2467647/congreso-tumba-reduccion-jornada-laboral-prosperar-veto-vox-junts.html",
+   "conf": "alta"
+  },
+  "fa": {
+   "pos": 2,
+   "why": "Es la ley de Yolanda Díaz; votó por mantenerla y anunció que la volverá a presentar.",
+   "src": "https://www.periodicodeibiza.es/noticias/nacional/2025/09/11/2467647/congreso-tumba-reduccion-jornada-laboral-prosperar-veto-vox-junts.html",
+   "conf": "alta"
+  },
+  "podemos": {
+   "pos": 2,
+   "why": "Votó contra las enmiendas que tumbaron la ley y avisó de que no apoyaría rebajarla para atraer a Junts.",
+   "src": "https://www.elindependiente.com/espana/2025/05/06/podemos-advierte-a-yolanda-diaz-de-que-no-aprobara-una-reduccion-de-jornada-laboral-con-recortes-para-atraer-a-junts/amp/",
+   "conf": "alta"
+  },
+  "salf": {
+   "pos": null,
+   "why": "No consta postura pública sobre la reducción de la jornada laboral a 37,5 horas.",
+   "src": null,
+   "conf": "baja"
+  },
+  "bng": {
+   "pos": 2,
+   "why": "Votó contra las enmiendas de totalidad que tumbaron la ley de 37,5 horas en septiembre de 2025.",
+   "src": "https://www.periodicodeibiza.es/noticias/nacional/2025/09/11/2467647/congreso-tumba-reduccion-jornada-laboral-prosperar-veto-vox-junts.html",
+   "conf": "alta"
+  },
+  "erc": {
+   "pos": 2,
+   "why": "Votó contra las enmiendas de totalidad que tumbaron la ley de 37,5 horas en septiembre de 2025.",
+   "src": "https://www.periodicodeibiza.es/noticias/nacional/2025/09/11/2467647/congreso-tumba-reduccion-jornada-laboral-prosperar-veto-vox-junts.html",
+   "conf": "alta"
+  },
+  "bildu": {
+   "pos": 2,
+   "why": "Votó contra las enmiendas de totalidad que tumbaron la ley de 37,5 horas en septiembre de 2025.",
+   "src": "https://www.periodicodeibiza.es/noticias/nacional/2025/09/11/2467647/congreso-tumba-reduccion-jornada-laboral-prosperar-veto-vox-junts.html",
+   "conf": "alta"
+  },
+  "junts": {
+   "pos": -2,
+   "why": "Su enmienda a la totalidad tumbó la ley en 2025; dice no oponerse a reducir jornada, pero sí a imponerla por ley.",
+   "src": "https://en.ara.cat/politics/blames-the-spanish-government-for-the-failure-of-reducing-working-hours-we-are-not-against-it_1_5491902.amp.html",
+   "conf": "alta"
+  },
+  "pnv": {
+   "pos": 2,
+   "why": "Votó contra las enmiendas de totalidad que tumbaron la ley de 37,5 horas en septiembre de 2025.",
+   "src": "https://www.periodicodeibiza.es/noticias/nacional/2025/09/11/2467647/congreso-tumba-reduccion-jornada-laboral-prosperar-veto-vox-junts.html",
+   "conf": "alta"
+  }
+ },
+ "t2": {
+  "nota_redaccion": null,
+  "pp": {
+   "pos": -2,
+   "why": "Votó contra la proposición de Sumar de 2025 para encarecer el despido improcedente; salió adelante por el error de un diputado suyo.",
+   "src": "https://forbes.es/?p=799187",
+   "conf": "alta"
+  },
+  "psoe": {
+   "pos": 1,
+   "why": "Votó a favor de la proposición de Sumar de 2025, pero el Ministerio de Economía frena la reforma del despido.",
+   "src": "https://www.que.es/2026/06/29/reforma-despido-espana-trabajo/",
+   "conf": "alta"
+  },
+  "vox": {
+   "pos": -2,
+   "why": "Votó en contra de la proposición de Sumar de 2025 para encarecer el despido improcedente.",
+   "src": "https://forbes.es/?p=799187",
+   "conf": "alta"
+  },
+  "fa": {
+   "pos": 2,
+   "why": "Promovió la proposición aprobada en 2025 para un despido disuasorio y reparador; Trabajo prepara la reforma.",
+   "src": "https://forbes.es/?p=799187",
+   "conf": "alta"
+  },
+  "podemos": {
+   "pos": 2,
+   "why": "Votó a favor de la proposición de Sumar de 2025 para encarecer el despido improcedente.",
+   "src": "https://forbes.es/?p=799187",
+   "conf": "alta"
+  },
+  "salf": {
+   "pos": null,
+   "why": "No consta postura pública sobre la indemnización por despido improcedente.",
+   "src": null,
+   "conf": "baja"
+  },
+  "bng": {
+   "pos": 2,
+   "why": "Votó a favor de la proposición de Sumar de 2025 para encarecer el despido improcedente.",
+   "src": "https://forbes.es/?p=799187",
+   "conf": "alta"
+  },
+  "erc": {
+   "pos": 2,
+   "why": "Votó a favor de la proposición de Sumar de 2025 para encarecer el despido improcedente.",
+   "src": "https://forbes.es/?p=799187",
+   "conf": "alta"
+  },
+  "bildu": {
+   "pos": 2,
+   "why": "Votó a favor de la proposición de Sumar de 2025 para encarecer el despido improcedente.",
+   "src": "https://forbes.es/?p=799187",
+   "conf": "alta"
+  },
+  "junts": {
+   "pos": 0,
+   "why": "Se abstuvo en la proposición de Sumar de 2025 para encarecer el despido improcedente.",
+   "src": "https://forbes.es/?p=799187",
+   "conf": "alta"
+  },
+  "pnv": {
+   "pos": 2,
+   "why": "Votó a favor de la proposición de Sumar de 2025 para encarecer el despido improcedente.",
+   "src": "https://forbes.es/?p=799187",
+   "conf": "alta"
+  }
+ },
+ "t3": {
+  "nota_redaccion": "Discrimina poco: desde 2025 el SMI ya no paga IRPF gracias a una deducción, y casi todos los partidos lo apoyan. Valorar sustituirla, p. ej.: 'El mínimo exento del IRPF debería subir automáticamente cada vez que sube el salario mínimo.'",
+  "pp": {
+   "pos": 2,
+   "why": "Registró en 2025 una proposición de ley para que el SMI no tribute; se abstuvo en la enmienda de PSOE y Sumar.",
+   "src": "https://theobjective.com/espana/politica/2025-02-11/pp-sumar-proposicion-irpf-smi/",
+   "conf": "alta"
+  },
+  "psoe": {
+   "pos": 1,
+   "why": "Hacienda quiso que el SMI tributara en 2025, pero luego pactó con Sumar una deducción que lo exime y la votó.",
+   "src": "https://es.ara.cat/economia/cuentas-publicas/congreso-deshace-lio-salario-minimo-no-pagara-irpf_1_5407256.html",
+   "conf": "alta"
+  },
+  "vox": {
+   "pos": 0,
+   "why": "Votó en contra de la enmienda que eximía el SMI en 2025, aunque su programa de 2023 proponía bajar el IRPF a rentas bajas.",
+   "src": "https://es.ara.cat/economia/cuentas-publicas/congreso-deshace-lio-salario-minimo-no-pagara-irpf_1_5407256.html",
+   "conf": "baja"
+  },
+  "fa": {
+   "pos": 2,
+   "why": "Presentó una proposición de ley para eximir el SMI del IRPF y pactó con el PSOE la deducción que lo exime.",
+   "src": "https://theobjective.com/espana/politica/2025-02-11/pp-sumar-proposicion-irpf-smi/",
+   "conf": "alta"
+  },
+  "podemos": {
+   "pos": 2,
+   "why": "Registró en 2025 una proposición de ley propia para que el salario mínimo no tribute en el IRPF.",
+   "src": "https://theobjective.com/espana/politica/2025-02-11/pp-sumar-proposicion-irpf-smi/",
+   "conf": "alta"
+  },
+  "salf": {
+   "pos": 2,
+   "why": "En Andalucía (2026) propuso IRPF autonómico al 0% para rentas por debajo de 35.000 euros.",
+   "src": "https://theobjective.com/espana/politica/2026-05-01/alvise-canal-sur-juanma-moreno/",
+   "conf": "media"
+  },
+  "bng": {
+   "pos": 2,
+   "why": "Copromovió con PSOE y Sumar la enmienda de 2025 que exime del IRPF a quien cobra el SMI.",
+   "src": "https://es.ara.cat/economia/cuentas-publicas/congreso-deshace-lio-salario-minimo-no-pagara-irpf_1_5407256.html",
+   "conf": "alta"
+  },
+  "erc": {
+   "pos": 2,
+   "why": "Votó a favor de la enmienda de 2025 que exime del IRPF a quien cobra el SMI.",
+   "src": "https://es.ara.cat/economia/cuentas-publicas/congreso-deshace-lio-salario-minimo-no-pagara-irpf_1_5407256.html",
+   "conf": "alta"
+  },
+  "bildu": {
+   "pos": 2,
+   "why": "Votó a favor de la enmienda de 2025 que exime del IRPF a quien cobra el SMI.",
+   "src": "https://es.ara.cat/economia/cuentas-publicas/congreso-deshace-lio-salario-minimo-no-pagara-irpf_1_5407256.html",
+   "conf": "alta"
+  },
+  "junts": {
+   "pos": null,
+   "why": "No consta su voto ni una postura pública sobre la exención del SMI en el IRPF.",
+   "src": null,
+   "conf": "baja"
+  },
+  "pnv": {
+   "pos": 2,
+   "why": "Votó a favor de la enmienda de 2025 que exime del IRPF a quien cobra el SMI.",
+   "src": "https://es.ara.cat/economia/cuentas-publicas/congreso-deshace-lio-salario-minimo-no-pagara-irpf_1_5407256.html",
+   "conf": "alta"
+  }
+ },
+ "t4": {
+  "nota_redaccion": null,
+  "pp": {
+   "pos": -2,
+   "why": "Votó en contra de la reforma de pensiones de 2023, que subió cotizaciones con el destope y la cuota de solidaridad.",
+   "src": "https://www.merca2.es/2023/03/30/congreso-aprueba-reforma-pensiones-rechazo-final-pp-ciudadanos-abstencion-vox-1268080/",
+   "conf": "alta"
+  },
+  "psoe": {
+   "pos": 2,
+   "why": "Su Gobierno aprobó en 2023 la reforma que sube las bases máximas, crea la cuota de solidaridad y eleva el MEI.",
+   "src": "https://www.merca2.es/2023/03/30/congreso-aprueba-reforma-pensiones-rechazo-final-pp-ciudadanos-abstencion-vox-1268080/",
+   "conf": "alta"
+  },
+  "vox": {
+   "pos": -2,
+   "why": "Se abstuvo en la reforma de 2023, pero su programa propone bajar las cotizaciones sociales para abaratar la contratación.",
+   "src": "https://www.infobae.com/espana/2023/07/07/eliminar-chiringuitos-reducir-masivamente-los-impuestos-y-que-espana-recupere-el-sentido-comun-este-es-el-programa-de-vox/",
+   "conf": "media"
+  },
+  "fa": {
+   "pos": 2,
+   "why": "Como Unidas Podemos votó a favor de la reforma de 2023, que sube cotizaciones a sueldos altos y empresas.",
+   "src": "https://www.merca2.es/2023/03/30/congreso-aprueba-reforma-pensiones-rechazo-final-pp-ciudadanos-abstencion-vox-1268080/",
+   "conf": "alta"
+  },
+  "podemos": {
+   "pos": 2,
+   "why": "Como Unidas Podemos votó a favor de la reforma de 2023 y había exigido destopar las bases máximas.",
+   "src": "https://www.merca2.es/2023/03/30/congreso-aprueba-reforma-pensiones-rechazo-final-pp-ciudadanos-abstencion-vox-1268080/",
+   "conf": "alta"
+  },
+  "salf": {
+   "pos": null,
+   "why": "No consta postura sobre subir cotizaciones a empresas o sueldos altos.",
+   "src": null,
+   "conf": "baja"
+  },
+  "bng": {
+   "pos": 1,
+   "why": "Votó contra la reforma de 2023 por mantener recortes en el cálculo de la pensión, no por la subida de cotizaciones.",
+   "src": "https://www.elsaltodiario.com/pensiones/gobierno-logra-apoyo-del-congreso-reforma-pensiones",
+   "conf": "baja"
+  },
+  "erc": {
+   "pos": 2,
+   "why": "Votó a favor de la reforma de pensiones de 2023, que sube cotizaciones a sueldos altos y empresas.",
+   "src": "https://www.merca2.es/2023/03/30/congreso-aprueba-reforma-pensiones-rechazo-final-pp-ciudadanos-abstencion-vox-1268080/",
+   "conf": "alta"
+  },
+  "bildu": {
+   "pos": 1,
+   "why": "Se abstuvo en la reforma de 2023 reclamando pensiones mínimas más altas; no consta rechazo a subir cotizaciones.",
+   "src": "https://www.lamarea.com/2023/03/30/el-congreso-avala-la-reforma-de-las-pensiones",
+   "conf": "baja"
+  },
+  "junts": {
+   "pos": 0,
+   "why": "Se abstuvo en la convalidación de la reforma de pensiones de 2023, que subió las cotizaciones.",
+   "src": "https://www.merca2.es/2023/03/30/congreso-aprueba-reforma-pensiones-rechazo-final-pp-ciudadanos-abstencion-vox-1268080/",
+   "conf": "media"
+  },
+  "pnv": {
+   "pos": 1,
+   "why": "Votó a favor de la reforma de 2023 tras negociar limitar su impacto en pymes y cooperativas.",
+   "src": "https://www.ondavasca.com/el-pnv-negocia-el-impacto-del-acuerdo-de-pensiones-en-cooperativas-y-autonomos/amp/",
+   "conf": "alta"
+  }
+ }
+}
