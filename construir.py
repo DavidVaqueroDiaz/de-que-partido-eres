@@ -11,7 +11,7 @@ import sys
 AQUI = os.path.dirname(os.path.abspath(__file__))
 
 # Enlace público del test (el del Artifact en claude.ai). Vacío = se ocultan los botones de compartir.
-SHARE_URL = ""
+SHARE_URL = "https://claude.ai/artifact/HLiqBkfStM8brRdw4PWttb"
 
 PARTIES = [
     # Orden alfabético para no dar preferencia a nadie en la portada.
